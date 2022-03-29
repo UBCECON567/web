@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Paul Schrimpf">
+  <meta name="dcterms.date" content="2019-03-04">
+  <title>Assignment: pharmacy entry</title>
+
+<!-- TODO check if math works with plotly  -->
+<!-- Need to load plotly before Mathjax or pandoc equations don't work -->
+
+
+<script type="text/javascript">
+  var fileref=document.createElement('script')
+  fileref.setAttribute("type","text/javascript")
+  fileref.setAttribute("src", "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
+  document.getElementsByTagName("head")[0].appendChild(fileref)
+</script>
+
+  <style type="text/css">
+  @font-face {
+    font-style: normal;
+    font-weight: 300;
+  }
+  @font-face {
+    font-style: normal;
+    font-weight: 400;
+  }
+  @font-face {
+    font-style: normal;
+    font-weight: 600;
+  }
+  html {
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+  }
+  body {
+    margin: 0;
+  }
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  main,
+  menu,
+  nav,
+  section,
+  summary {
+    display: block;
+  }
+  audio,
+  canvas,
+  progress,
+  video {
+    display: inline-block; /* 1 */
+    vertical-align: baseline; /* 2 */
+  }
+  audio:not([controls]) {
+    display: none;
+    height: 0;
+  }
+  [hidden],
+  template {
+    display: none;
+  }
+  a:active,
+  a:hover {
+    outline: 0;
+  }
+  abbr[title] {
+    border-bottom: 1px dotted;
+  }
+  b,
+  strong {
+    font-weight: bold;
+  }
+  dfn {
+    font-style: italic;
+  }
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  mark {
+    background: #ff0;
+    color: #000;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sup {
+    top: -0.5em;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  img {
+    border: 0;
+  }
+  svg:not(:root) {
+    overflow: hidden;
+  }
+  figure {
+    margin: 1em 40px;
+  }
+  hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+  }
+  pre {
+    overflow: auto;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+  }
+  button {
+    overflow: visible;
+  }
+  button,
+  select {
+    text-transform: none;
+  }
+  button,
+  html input[type="button"], /* 1 */
+  input[type="reset"],
+  input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+  }
+  button[disabled],
+  html input[disabled] {
+    cursor: default;
+  }
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+  input {
+    line-height: normal;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+  }
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+  }
+  legend {
+    border: 0; /* 1 */
+    padding: 0; /* 2 */
+  }
+  textarea {
+    overflow: auto;
+  }
+  optgroup {
+    font-weight: bold;
+  }
+  table {
+    font-family: monospace, monospace;
+    font-size : 0.8em;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  td,
+  th {
+    padding: 0;
+  }
+  thead th {
+      border-bottom: 1px solid black;
+      background-color: white;
+  }
+  tr:nth-child(odd){
+    background-color: rgb(248,248,248);
+  }
+  
+  /*
+  * Skeleton V2.0.4
+  * Copyright 2014, Dave Gamache
+  * www.getskeleton.com
+  * Free to use under the MIT license.
+  * http://www.opensource.org/licenses/mit-license.php
+  * 12/29/2014
+  */
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box; }
+  .column,
+  .columns {
+    width: 100%;
+    float: left;
+    box-sizing: border-box; }
+  @media (min-width: 400px) {
+    .container {
+      width: 85%;
+      padding: 0; }
+  }
+  @media (min-width: 550px) {
+    .container {
+      width: 80%; }
+    .column,
+    .columns {
+      margin-left: 4%; }
+    .column:first-child,
+    .columns:first-child {
+      margin-left: 0; }
+  
+    .one.column,
+    .one.columns                    { width: 4.66666666667%; }
+    .two.columns                    { width: 13.3333333333%; }
+    .three.columns                  { width: 22%;            }
+    .four.columns                   { width: 30.6666666667%; }
+    .five.columns                   { width: 39.3333333333%; }
+    .six.columns                    { width: 48%;            }
+    .seven.columns                  { width: 56.6666666667%; }
+    .eight.columns                  { width: 65.3333333333%; }
+    .nine.columns                   { width: 74.0%;          }
+    .ten.columns                    { width: 82.6666666667%; }
+    .eleven.columns                 { width: 91.3333333333%; }
+    .twelve.columns                 { width: 100%; margin-left: 0; }
+  
+    .one-third.column               { width: 30.6666666667%; }
+    .two-thirds.column              { width: 65.3333333333%; }
+  
+    .one-half.column                { width: 48%; }
+  
+    /* Offsets */
+    .offset-by-one.column,
+    .offset-by-one.columns          { margin-left: 8.66666666667%; }
+    .offset-by-two.column,
+    .offset-by-two.columns          { margin-left: 17.3333333333%; }
+    .offset-by-three.column,
+    .offset-by-three.columns        { margin-left: 26%;            }
+    .offset-by-four.column,
+    .offset-by-four.columns         { margin-left: 34.6666666667%; }
+    .offset-by-five.column,
+    .offset-by-five.columns         { margin-left: 43.3333333333%; }
+    .offset-by-six.column,
+    .offset-by-six.columns          { margin-left: 52%;            }
+    .offset-by-seven.column,
+    .offset-by-seven.columns        { margin-left: 60.6666666667%; }
+    .offset-by-eight.column,
+    .offset-by-eight.columns        { margin-left: 69.3333333333%; }
+    .offset-by-nine.column,
+    .offset-by-nine.columns         { margin-left: 78.0%;          }
+    .offset-by-ten.column,
+    .offset-by-ten.columns          { margin-left: 86.6666666667%; }
+    .offset-by-eleven.column,
+    .offset-by-eleven.columns       { margin-left: 95.3333333333%; }
+  
+    .offset-by-one-third.column,
+    .offset-by-one-third.columns    { margin-left: 34.6666666667%; }
+    .offset-by-two-thirds.column,
+    .offset-by-two-thirds.columns   { margin-left: 69.3333333333%; }
+  
+    .offset-by-one-half.column,
+    .offset-by-one-half.columns     { margin-left: 52%; }
+  
+  }
+  html {
+    font-size: 62.5%; }
+  body {
+    font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222; }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 300; }
+  h1 { font-size: 3.6rem; line-height: 1.2;  letter-spacing: -.1rem;}
+  h2 { font-size: 3.4rem; line-height: 1.25; letter-spacing: -.1rem; }
+  h3 { font-size: 3.2rem; line-height: 1.3;  letter-spacing: -.1rem; }
+  h4 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -.08rem; }
+  h5 { font-size: 2.4rem; line-height: 1.5;  letter-spacing: -.05rem; }
+  h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+  
+  p {
+    margin-top: 0; }
+  a {
+    color: #1EAEDB; }
+  a:hover {
+    color: #0FA0CE; }
+  .button,
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    display: inline-block;
+    height: 38px;
+    padding: 0 30px;
+    color: #555;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box; }
+  .button:hover,
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover,
+  input[type="button"]:hover,
+  .button:focus,
+  button:focus,
+  input[type="submit"]:focus,
+  input[type="reset"]:focus,
+  input[type="button"]:focus {
+    color: #333;
+    border-color: #888;
+    outline: 0; }
+  .button.button-primary,
+  button.button-primary,
+  input[type="submit"].button-primary,
+  input[type="reset"].button-primary,
+  input[type="button"].button-primary {
+    color: #FFF;
+    background-color: #33C3F0;
+    border-color: #33C3F0; }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    color: #FFF;
+    background-color: #1EAEDB;
+    border-color: #1EAEDB; }
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  textarea,
+  select {
+    height: 38px;
+    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box; }
+  /* Removes awkward default styles on some inputs for iOS */
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  textarea {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none; }
+  textarea {
+    min-height: 65px;
+    padding-top: 6px;
+    padding-bottom: 6px; }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #33C3F0;
+    outline: 0; }
+  label,
+  legend {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 600; }
+  fieldset {
+    padding: 0;
+    border-width: 0; }
+  input[type="checkbox"],
+  input[type="radio"] {
+    display: inline; }
+  label > .label-body {
+    display: inline-block;
+    margin-left: .5rem;
+    font-weight: normal; }
+  ul {
+    list-style: circle inside; }
+  ol {
+    list-style: decimal inside; }
+  ol, ul {
+    padding-left: 0;
+    margin-top: 0; }
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul {
+    margin: 1.5rem 0 1.5rem 3rem;
+    font-size: 90%; }
+  li {
+    margin-bottom: 1rem; }
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1; }
+  th:first-child,
+  td:first-child {
+    padding-left: 0; }
+  th:last-child,
+  td:last-child {
+    padding-right: 0; }
+  button,
+  .button {
+    margin-bottom: 1rem; }
+  input,
+  textarea,
+  select,
+  fieldset {
+    margin-bottom: 1.5rem; }
+  pre,
+  blockquote,
+  dl,
+  figure,
+  table,
+  p,
+  ul,
+  ol,
+  form {
+    margin-bottom: 2.5rem; }
+  .u-full-width {
+    width: 100%;
+    box-sizing: border-box; }
+  .u-max-full-width {
+    max-width: 100%;
+    box-sizing: border-box; }
+  .u-pull-right {
+    float: right; }
+  .u-pull-left {
+    float: left; }
+  hr {
+    margin-top: 3rem;
+    margin-bottom: 3.5rem;
+    border-width: 0;
+    border-top: 1px solid #E1E1E1; }
+  .container:after,
+  .row:after,
+  .u-cf {
+    content: "";
+    display: table;
+    clear: both; }
+  
+  pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  pre.sourceCode.julia {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  pre.julia-error {
+    color : red
+  }
+  
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+  code {
+    background-color: #ffffff;
+    border-radius: 4px;
+  }
+  
+  code.sourceCode.julia {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+  
+  
+  @media (min-width: 400px) {}
+  @media (min-width: 550px) {}
+  @media (min-width: 750px) {}
+  @media (min-width: 1000px) {}
+  @media (min-width: 1200px) {}
+  
+  h1.title {margin-top : 20px}
+  img {max-width : 100%}
+  </style>
+
+
+<style>
+pre.hljl {
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 5px;
+    overflow-x: auto;
+    color: rgb(68,68,68); background-color: rgb(251,251,251); }
+pre.hljl > span.hljl-t { }
+pre.hljl > span.hljl-w { }
+pre.hljl > span.hljl-e { }
+pre.hljl > span.hljl-eB { }
+pre.hljl > span.hljl-o { }
+pre.hljl > span.hljl-k { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kc { color: rgb(59,151,46); font-style: italic; }
+pre.hljl > span.hljl-kd { color: rgb(214,102,97); font-style: italic; }
+pre.hljl > span.hljl-kn { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kp { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kr { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kt { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-n { }
+pre.hljl > span.hljl-na { }
+pre.hljl > span.hljl-nb { }
+pre.hljl > span.hljl-nbp { }
+pre.hljl > span.hljl-nc { }
+pre.hljl > span.hljl-ncB { }
+pre.hljl > span.hljl-nd { color: rgb(214,102,97); }
+pre.hljl > span.hljl-ne { }
+pre.hljl > span.hljl-neB { }
+pre.hljl > span.hljl-nf { color: rgb(66,102,213); }
+pre.hljl > span.hljl-nfm { color: rgb(66,102,213); }
+pre.hljl > span.hljl-np { }
+pre.hljl > span.hljl-nl { }
+pre.hljl > span.hljl-nn { }
+pre.hljl > span.hljl-no { }
+pre.hljl > span.hljl-nt { }
+pre.hljl > span.hljl-nv { }
+pre.hljl > span.hljl-nvc { }
+pre.hljl > span.hljl-nvg { }
+pre.hljl > span.hljl-nvi { }
+pre.hljl > span.hljl-nvm { }
+pre.hljl > span.hljl-l { }
+pre.hljl > span.hljl-ld { color: rgb(148,91,176); font-style: italic; }
+pre.hljl > span.hljl-s { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sa { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sb { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sc { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sd { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sdB { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sdC { color: rgb(201,61,57); }
+pre.hljl > span.hljl-se { color: rgb(59,151,46); }
+pre.hljl > span.hljl-sh { color: rgb(201,61,57); }
+pre.hljl > span.hljl-si { }
+pre.hljl > span.hljl-so { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sr { color: rgb(201,61,57); }
+pre.hljl > span.hljl-ss { color: rgb(201,61,57); }
+pre.hljl > span.hljl-ssB { color: rgb(201,61,57); }
+pre.hljl > span.hljl-nB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nbB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nfB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nh { color: rgb(59,151,46); }
+pre.hljl > span.hljl-ni { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nil { color: rgb(59,151,46); }
+pre.hljl > span.hljl-noB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-oB { color: rgb(102,102,102); font-weight: bold; }
+pre.hljl > span.hljl-ow { color: rgb(102,102,102); font-weight: bold; }
+pre.hljl > span.hljl-p { }
+pre.hljl > span.hljl-c { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-ch { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cm { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cp { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cpB { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cs { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-csB { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-g { }
+pre.hljl > span.hljl-gd { }
+pre.hljl > span.hljl-ge { }
+pre.hljl > span.hljl-geB { }
+pre.hljl > span.hljl-gh { }
+pre.hljl > span.hljl-gi { }
+pre.hljl > span.hljl-go { }
+pre.hljl > span.hljl-gp { }
+pre.hljl > span.hljl-gs { }
+pre.hljl > span.hljl-gsB { }
+pre.hljl > span.hljl-gt { }
+</style>
+
+
+
+</head>
+<body>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12 twelve columns">
+
+
+
+<h1 class="title">Assignment: pharmacy entry</h1>
+<h1 class="subtitle">Part I-III: data preparation</h1>
+
+<p><strong>Author:</strong>
+Paul Schrimpf
+<br />
+
+<strong>Date: </strong>2019-03-04
+</p>
+
+<nav id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#getting-started">Getting started</a></li>
+</ul></li>
+<li><a href="#part-i-scraping-pharmacy-data">Part I: scraping pharmacy data</a></li>
+<li><a href="#part-ii-downloading-census-data">Part II: downloading census data</a></li>
+<li><a href="#part-iii-geocoding">Part III: geocoding</a><ul>
+<li><a href="#population-centres-assigned-more-than-10-pharmacies.">Population centres assigned more than 10 pharmacies.</a></li>
+<li><a href="#population-centres-with-0-pharmacies">Population centres with 0 pharmacies</a></li>
+</ul></li>
+</ul>
+</nav>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative
+Commons License" style="border-width:0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAYAAABjyArgAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAdnJLH8AAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABh9JREFUaN7tWltPG0cU9nOlIN55KFKRApWoSKu06kuClP4A+gPSUvU1alFbVYpEFYpIq6hVkUVF00rgRnkrFwPGgC/YBtv4srbXhpBXIvGQviF+wYm+s55ldlnbu951WjmMdOT1zOwZ+5sz37ns+oiox+fz0ZV4L0T4qH8JRzdpO75FkcQOxfdilEgnaC+bonQ+TQfFLOVLOSqUC6RUilRSFSpVS5qoCilqkYrlAs/B3Ew+zfcm0wnWFUlEWDfWCO1s0Pr2Gq2Fg7S6uUIroWWW5Y0lWlr/p2tEAvoC3GgyQrv7cUplkpTO7TNYhXKeAazUylQ9Uqn2rEqHx4d09FwTXNee1XgMcxRV4XtwL3SksknWCd1mkIPhVR1kANylIPuM4GZTbIE5JcfWCtAA6szDGbrzyR261nPt0lFAH8ZmfprhuZXDCm8KLDpTyLA17+7vGkDe2Fmnta2gBnJopaUV35+8T0NDQ5fWRh/G3ILRCf06wKAFGVwAU6oqbJX+OT/19fXZ5h3M9f/u53tBIbDmrA5yXKeLzUiINrY1kJtZ8dzjORocGtT1j46O0sTEBAuuRT/mYK5TEDqpXwcYPAlauAC3xJY49umYAbze3l4aHx+nqakpSiaTLLhGH8bkubg3k0tTuaaBDEsGXWicvENbsbCRKiysOPB0kXp6ejR9Y2N0cnJC5oY+jGEO5joBodP6dYDh0MCXoAVYrhlcgAcgz87OqFkLBAIGoLHrABkbho3DGnB8sVSUdna3NaqwsGLxA4VlYQPlJnlpw9piTbsAWOk/PT2lfC7Hgms3+nWAcXzhlMC5ONoyuCMjI5Y726hhE3CPbMnQCU7GGhdUIVnx1hoFN1cNNAHeE5b1/Pi4JcBowtLscKaV/qdPntA7b/cbJBqJtKXfAHCaqSHPDg2cK4PbymrtgAxOhuNjqsinKZnRrJi5OKpxsaAJAbBwOE42F3OFY2r15836YbEA9PZHH9OXn39B33/7nQ6yf3bWsX4DwGy9apGpQTg0HHVVVandBpAFXUAndCOEE1Yc39OsWI4oZJoQDsfccJzFxpmpA004Jjt/Xug/Pz+nwPxfDOZvP/+i61pcWOC+G8PvOdZvABj8WK6VORQTPx6c67YJ3oIghMMJEVycqIdtMk2YAYYnNzeLbMnQcI9dgIV+ADwwMMBgDg4OGvhYWPG/L1860m8AGBmaeqRyLCusV6YGRAvgH+weRAbfPDZbP06iCSuGbnAxMr5LNBEJadGExMOvE2C0cDhMw8PD/H+sAH5x8qJ9gOHccIRFEiEfPSxoFe8CzGAwaDkm3y+ONHQj4wMVZeshWywV42gCPCzCtf+CItDgzODkCvm83re8tKQD7IoiUE84PK7pP1y2QuGs+vv7meQBOK5x/MWYiDQAuBizogmk1SUDD8cM4ZoMcDMn18h63Tg5wbeQmR+nWd69fp2/P57/w52TQ+yLuoL44fIxacbJdvhaPgFYAzHxQfGgJcByGGUX4HbDNNEAqjlM++rePeZoV2Ha/xFgp4mG4Ea3iYZSVJgaIHL83Y5+xxQBx4fQDdcAVaYI85hbiuiqVLmZk2vmyOw4ObHzmpOr8lp2nJwMglyMwWZCP/TKyUy7xZ5O6r8UpokUGaGV+Zg3CtMAsug3j6HBouUwrSCFadFk4zCtq8qVItGQ02RzPOtlorFfTzRQuhSJRqOCT1cU3LMF61TZSR3A61S5qwCWiz2Lfy94X+yZ87NuFHuwlihZyoV3c7GnqwCGTD6Y1MuVdz+7awDZSdEHVm9ZrqwUafrh9Jv4dPniy8Q3X3MYVW2j4I4xzJEL7jc/vMnUgDgbG/iGPr43dvzwYJKTAYAsW3I7j4wAbrlaovk/592+X2CZZJjndGINt3p9Vp0Msqo99AQnO37oOSceeiquwTWDZ3XtBbh21/QEYEEX8mN7gNbqsT2eXPBje7wfUSl6RgutypVertGozuE5wJD3P7hBwY0gh3CIk1X9xZOa9OJJjfvkF0/WQkG6dfuWl68gdYwaGq3VcQuWBWA9+vURxVNx6dWpuuDVqUqRxzDHS2BflwW34viOA3wlLoSI3roConNvV74C8NfodpNElTgAAAAASUVORK5CYII=" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<h3 id="about-this-document" class="unnumbered">About this document</h3>
+<p>This document was created using Weave.jl. The code is available in <a href="https://github.com/ECON567/PharmacyEntry">on github</a>. The same document generates both static webpages and associated jupyter notebooks.</p>
+<p><span class="math display">\[
+\def\indep{\perp\!\!\!\perp}
+\def\Er{\mathrm{E}}
+\def\R{\mathbb{R}}
+\def\En{{\mathbb{E}_n}}
+\def\Pr{\mathrm{P}}
+\newcommand{\norm}[1]{\left\Vert {#1} \right\Vert}
+\newcommand{\abs}[1]{\left\vert {#1} \right\vert}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\inprob{\,{\buildrel p \over \rightarrow}\,} 
+\def\indist{\,{\buildrel d \over \rightarrow}\,} 
+\]</span></p>
+<h1 id="introduction">Introduction</h1>
+<p>This assignment will estimate a model of pharmacy entry inspired by <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span>.</p>
+<h2 id="getting-started">Getting started</h2>
+<p><a href="https://vse.syzygy.ca">https://vse.syzygy.ca</a> provides a convenient browser based interface to Julia. Open it and log in. This assignment is in a git repository at <a href="https://github.com/UBCECON567/PharmacyEntry">https://github.com/UBCECON567/PharmacyEntry</a>. Start by cloning the git repository to your syzygy directory. Open a terminal in syzygy (File -&gt; New -&gt; Terminal). This will open a Linux shell in your browser. To clone the git repository, enter</p>
+<p><code>git clone https://github.com/UBCECON567/PharmacyEntry</code></p>
+<p>This will create a directory called <code>PharmacyEntry</code> containing all the files related to this assignment.</p>
+<p>Clicking on the folder icon near the top left of the screen opens a file browser panel. Use it to open the <code>PharmacyEntry/notebooks</code> folder. You can complete this assignment by modifying the <code>pharmacyentry.ipynb</code> notebook. I recommend creating a copy of this notebook, and then working on the copy. You can create a copy by right clicking in the file browser panel. Now open your copy of the notebook.</p>
+<p>There might be some problem with previously installed julia packages and the upgrade to vse.syzygy.ca . If you can no longer run Julia notebooks, and are seeing “No Kernel!” in the top right of the screen, you can try removing your previously installed julia packages. Open a terminal and type “rm -rf ~/.julia”. Afterward, you will have to re-add any packages you need.</p>
+<!-- ## Optional: setup a local working environment -->
+<!-- If you are happy with working on vse.syzygy.ca, then you can skip this -->
+<!-- section. However, you might prefer to install Julia and related tools -->
+<!-- on your own computer.  -->
+<h1 id="part-i-scraping-pharmacy-data">Part I: scraping pharmacy data</h1>
+<p>As in the previous assignment, we begin by loading required packages.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Pkg</span><span class="hljl-t"> 
+</span><span class="hljl-n">Pkg</span><span class="hljl-oB">.</span><span class="hljl-nf">activate</span><span class="hljl-p">(</span><span class="hljl-s">&quot;..&quot;</span><span class="hljl-p">)</span><span class="hljl-t"> 
+</span><span class="hljl-cs">#Pkg.resolve()</span><span class="hljl-t">
+</span><span class="hljl-cs">#Pkg.instantiate()</span><span class="hljl-t">
+</span><span class="hljl-cs">#</span><span class="hljl-t">
+</span><span class="hljl-cs"># If you are missing packages, you may have to uncomment one of the</span><span class="hljl-t">
+</span><span class="hljl-cs"># two above lines. However, they seem to cause mysterious problems with</span><span class="hljl-t">
+</span><span class="hljl-cs"># HTTP.get() (especially with https sites) later. If you find</span><span class="hljl-t">
+</span><span class="hljl-cs"># HTTP.get() is hanging, then (1) run this cell with Pkg.instantiate()</span><span class="hljl-t">
+</span><span class="hljl-cs"># once, (2) comment out Pkg.instantiate() (3) re-start the kernel and</span><span class="hljl-t">
+</span><span class="hljl-cs"># re-run everything. </span><span class="hljl-t">
+</span><span class="hljl-cs">#</span><span class="hljl-t">
+
+</span><span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Revise</span><span class="hljl-t">
+</span><span class="hljl-k">if</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-oB">!</span><span class="hljl-p">(</span><span class="hljl-s">&quot;../src&quot;</span><span class="hljl-t"> </span><span class="hljl-oB">∈</span><span class="hljl-t"> </span><span class="hljl-n">LOAD_PATH</span><span class="hljl-p">))</span><span class="hljl-t">
+  </span><span class="hljl-nf">push!</span><span class="hljl-p">(</span><span class="hljl-n">LOAD_PATH</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-s">&quot;../src&quot;</span><span class="hljl-p">)</span><span class="hljl-t"> 
+</span><span class="hljl-k">end</span><span class="hljl-t">
+</span><span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">PharmacyEntry</span>
+</pre>
+<p>Part of the appeal of entry models is that they can be estimated using readily available data. <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span> used data on market demographic information and the number of firms within a category in each market. We can easily gather similar information. We will focus on pharmacies. We chose pharmacies because it was one of the industries included in <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span>, it fits with the theme of focusing on the industrial organization of health related industries, and a list of pharamacies in Canada is available. Pharmacies in Canada are provincially regulated. A list with the website of each provincial regulator can be found <a href="https://www.pharmacists.ca/pharmacy-in-canada/directory-of-pharmacy-organizations/provincial-regulatory-authorities1/">here</a>.</p>
+<p>Each provincial regulator provides a list of pharmacies with addresses. These can be downloaded and saved as DataFrames. Doing so is slightly tedious though because each provincial regulator’s website is different, so different code will be needed to parse each.</p>
+<p>Let’s look at community pharmacies in BC, <a href="http://www.bcpharmacists.org/list-community-pharmacies">http://www.bcpharmacists.org/list-community-pharmacies</a>. This list is already nicely formatted as a table. We could simply copy and paste its contents into a spreadsheet, save as cvs, and then load into Julia. That would be an okay method, but copying and pasting is slightly more error prone (or at least prone to undocumented and unreproducible errors) than writing code to parse the website. More importantly, other provinces have websites that are not so nicely formatted and will require code to parse. We will <a href="https://github.com/JuliaWeb/HTTP.jl">HTTP.jl</a> to request webpages, <a href="https://github.com/Algocircle/Cascadia.jl">Cascadia.jl</a> to select by CSS paths, and <a href="https://docs.julialang.org/en/v1.0/manual/strings/#Regular-Expressions-1">regular expressions</a> to find patterns in text. Although our code will be in Julia, CSS selectors and regular expressions are common and useful tools for scraping webpages with any programming language.</p>
+<p>To scrape websites well, you need some understanding of html, CSS, and sometimes javascript. <a href="https://www.w3schools.com/">https://www.w3schools.com/</a> is a pretty comprehensive reference. Here is a very short explanation. CSS stands for “cascading style sheets.” CSS is used to control the formatting of webpages. html documents consist of a bunch of tagged elements (headlines, links, tables, paragraphs, divs, etc) with optional class specifications. CSS contain information about how to display each combination of tag and class. The combination(s) of tags and classes to which a given display style (font, color, etc) applies is called a CSS selector. Each part of a webpage that looks different will have a different CSS selector. If we want to scrape some particular information off a webpage, CSS selectors are usually a good way to pick out the pieces we need.</p>
+<p>Returning to <a href="http://www.bcpharmacists.org/list-community-pharmacies">http://www.bcpharmacists.org/list-community-pharmacies</a>, we can see that the pharmacy names and addresses are in table rows with alternating background shades of gray. There will be CSS selectors to pick out these rows. Most web browsers include tools to create css selectors. In either Firefox or Chrome (Safari and Edge likely have similar behavior, but I have not checked), if you right click anywhere on a website, there is an “Inspect Element” option (you possibly need to enable developer tools in the web browser options first). This will open the developer toolbar. In the toolbar there will be a collapsible tree listing the nested html tags on the website. As you hover over different tags, the corresponding part of the website will be highlighted. If you right click a tag, there will be an option to copy the corresponding CSS selector. Doing this on <a href="http://www.bcpharmacists.org/list-community-pharmacies">http://www.bcpharmacists.org/list-community-pharmacies</a>, you will see that <code>tr.odd</code> and <code>tr.even</code> will select all rows from the table that we want. Here’s some Julia code to select these rows.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">HTTP</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">Gumbo</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">Cascadia</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># download website</span><span class="hljl-t">
+</span><span class="hljl-n">r</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t">  </span><span class="hljl-n">HTTP</span><span class="hljl-oB">.</span><span class="hljl-nf">get</span><span class="hljl-p">(</span><span class="hljl-s">&quot;http://www.bcpharmacists.org/list-community-pharmacies&quot;</span><span class="hljl-p">);</span><span class="hljl-t">  
+
+</span><span class="hljl-cs"># parse website into tree using Gumbo.jl</span><span class="hljl-t">
+</span><span class="hljl-n">h</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">Gumbo</span><span class="hljl-oB">.</span><span class="hljl-nf">parsehtml</span><span class="hljl-p">(</span><span class="hljl-nf">String</span><span class="hljl-p">(</span><span class="hljl-n">r</span><span class="hljl-oB">.</span><span class="hljl-n">body</span><span class="hljl-p">));</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># select elements by CSS with Cascadia</span><span class="hljl-t">
+</span><span class="hljl-n">rows</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">eachmatch</span><span class="hljl-p">(</span><span class="hljl-n">Cascadia</span><span class="hljl-oB">.</span><span class="hljl-nf">Selector</span><span class="hljl-p">(</span><span class="hljl-s">&quot;tr.odd, tr.even&quot;</span><span class="hljl-p">),</span><span class="hljl-t"> </span><span class="hljl-n">h</span><span class="hljl-oB">.</span><span class="hljl-n">root</span><span class="hljl-p">);</span><span class="hljl-t">
+</span><span class="hljl-nd">@show</span><span class="hljl-t"> </span><span class="hljl-nf">length</span><span class="hljl-p">(</span><span class="hljl-n">rows</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-nd">@show</span><span class="hljl-t"> </span><span class="hljl-nf">typeof</span><span class="hljl-p">(</span><span class="hljl-n">rows</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-nd">@show</span><span class="hljl-t"> </span><span class="hljl-nf">typeof</span><span class="hljl-p">(</span><span class="hljl-n">rows</span><span class="hljl-p">[</span><span class="hljl-ni">1</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-nf">display</span><span class="hljl-p">(</span><span class="hljl-n">rows</span><span class="hljl-p">[</span><span class="hljl-ni">1</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-nf">display</span><span class="hljl-p">(</span><span class="hljl-n">rows</span><span class="hljl-p">[</span><span class="hljl-ni">1</span><span class="hljl-p">]</span><span class="hljl-oB">.</span><span class="hljl-n">children</span><span class="hljl-p">)</span>
+</pre>
+<p>As you saw from the developer tools in your browser, html documents can be organized into a tree structure of nested tags. <a href="https://github.com/JuliaWeb/Gumbo.jl">Gumbo.jl</a> is a Julia package that stores html pages in exactly this sort of tree structure. From the output of the code, we can see that it successfully selected all 1000+ rows of the table of pharmacies. Each row is a HTMLElement as described in the documentation for <a href="https://github.com/JuliaWeb/Gumbo.jl">Gumbo.jl</a>. Each row has children corresponding to the 5 columns of the table. Now, we can extract the text from the 5 columns of each row and store it in a DataFrame.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">DataFrames</span><span class="hljl-t">
+</span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">parserow</span><span class="hljl-p">(</span><span class="hljl-n">row</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-n">fields</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">nodeText</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">row</span><span class="hljl-oB">.</span><span class="hljl-n">children</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-n">fields</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">reshape</span><span class="hljl-p">(</span><span class="hljl-n">fields</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-ni">1</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-nf">length</span><span class="hljl-p">(</span><span class="hljl-n">fields</span><span class="hljl-p">)))</span><span class="hljl-t">
+</span><span class="hljl-k">end</span><span class="hljl-t">
+</span><span class="hljl-n">txt</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">vcat</span><span class="hljl-p">(</span><span class="hljl-n">parserow</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">rows</span><span class="hljl-p">)</span><span class="hljl-oB">...</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">bc</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">DataFrame</span><span class="hljl-p">(</span><span class="hljl-n">txt</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-sc">:name</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:address</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:manager</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:phone</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:fax</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-nf">describe</span><span class="hljl-p">(</span><span class="hljl-n">bc</span><span class="hljl-p">)</span>
+</pre>
+<p>Later we are going to assign these pharmacies into isolated local markets and match them with census data. We will do so based on addresses. For this, it will be useful to parse the addresses into a consistent format. We will divide the address field into street, city, zip, and province. The dominant tool for matching, splitting, and substiting text based on patterns are <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expressions</a>. Regular expressions are nearly as old as computers themselves, and they remain an important and powerfull tool for text processing.</p>
+<h3 id="problem-1-familiarize-yourself-with-regular-expressions">Problem 1: familiarize yourself with regular expressions</h3>
+<p><a href="https://regexone.com/">This interactive tutorial</a> is a good way to learn the basics of regular expressions. Work through it. There is nothing to turn in for this part, but there is a small task below.</p>
+<p>Here is some Julia code using regular expressions to split addresses into their parts. See <a href="https://docs.julialang.org/en/v1.0/manual/strings/#Regular-Expressions-1">Julia’s documentation</a> for more information.</p>
+<pre class="hljl">
+<span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:street</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-oB">-&gt;</span><span class="hljl-nf">replace</span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-so">r&quot;(.+)\n.+, BC.+\n.+&quot;</span><span class="hljl-n">s</span><span class="hljl-t"> </span><span class="hljl-oB">=&gt;</span><span class="hljl-t"> </span><span class="hljl-so">s&quot;\1&quot;</span><span class="hljl-p">))</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:address</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:city</span><span class="hljl-p">]</span><span class="hljl-t">   </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-oB">-&gt;</span><span class="hljl-nf">replace</span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-so">r&quot;.+\n(.+), BC.+\n.+&quot;</span><span class="hljl-n">s</span><span class="hljl-t"> </span><span class="hljl-oB">=&gt;</span><span class="hljl-t"> </span><span class="hljl-so">s&quot;\1&quot;</span><span class="hljl-p">))</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:address</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:zip</span><span class="hljl-p">]</span><span class="hljl-t">  </span><span class="hljl-oB">=</span><span class="hljl-t">     </span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-oB">-&gt;</span><span class="hljl-nf">replace</span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-p">,</span><span class="hljl-so">r&quot;.+(\p{L}\d\p{L}).?(\d\p{L}\d).*&quot;</span><span class="hljl-n">s</span><span class="hljl-t"> </span><span class="hljl-oB">=&gt;</span><span class="hljl-t"> </span><span class="hljl-so">s&quot;\1 \2&quot;</span><span class="hljl-p">))</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:address</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:zipalt</span><span class="hljl-p">]</span><span class="hljl-t">    </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-oB">-&gt;</span><span class="hljl-nf">replace</span><span class="hljl-p">(</span><span class="hljl-n">a</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-so">r&quot;.+(\p{L}\d\p{L} \d\p{L}\d).*&quot;</span><span class="hljl-n">s</span><span class="hljl-t"> </span><span class="hljl-oB">=&gt;</span><span class="hljl-t"> </span><span class="hljl-so">s&quot;\1&quot;</span><span class="hljl-p">))</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:address</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-n">bc</span><span class="hljl-p">[</span><span class="hljl-sc">:province</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-s">&quot;BC&quot;</span><span class="hljl-t"> 
+</span><span class="hljl-nf">describe</span><span class="hljl-p">(</span><span class="hljl-n">bc</span><span class="hljl-p">)</span>
+</pre>
+<p>Compare :zip and :zipalt in the code above? What is the difference between the regular expressions used? Give an example of a pattern that one matches, but not the other. What is the problem with :zipalt?</p>
+<h3 id="problem-2-parse-an-additional-province">Problem 2: parse an additional province</h3>
+<p>The function <code>loadpharmacydata</code> in <code>PharmacyEntry/src/pharmacies.jl</code> downloads and parses the lists of pharmacies in BC and Manitoba. Add code to download data from at least one additional province. Note that the function <code>loadBCdata</code> and <code>loadMBdata</code> are not exported from the <code>PharmacyEntry.jl</code> module. To call non-exported functions from outside the module you must preface with the module name, e.g. <code>bc = PharmacyEntry.loadBCdata(true)</code>. Either include your modified version of pharmacies.jl with what you turn in, or include the new function definitions in this notebook.</p>
+<h1 id="part-ii-downloading-census-data">Part II: downloading census data</h1>
+<h3 id="problem-3-market-definition">Problem 3: market definition</h3>
+<p>We will download information on area demographic and economic conditions from Statistics Canada. An important choice in entry models is deciding what geographic area should define a market. See e.g. <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span> or <span class="citation" data-cites="ellickson2007">Ellickson (<a href="#ref-ellickson2007">2007</a>)</span>. Statistics Canada provides data at various <a href="https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/about-apropos/about-apropos.cfm?Lang=E">geographic levels</a>. I somewhat arbitrarily chose to download data at the population centre level. Criticise or defend this choice. Optionally, modify <code>census.jl</code> to download census data at a different geographic level (the changes might be somewhat extensive).</p>
+<h3 id="problem-4-choose-census-variables-to-extract">Problem 4: choose census variables to extract</h3>
+<p>The census data contains a lot of information. For example, all the information for the <a href="https://www12.statcan.gc.ca/census-recensement/2016/dp-pd/prof/details/page.cfm?Lang=E&amp;Geo1=POPC&amp;Code1=0973&amp;Geo2=PR&amp;Code2=59&amp;Data=Count&amp;SearchText=Vancouver&amp;SearchType=Begins&amp;SearchPR=01&amp;B1=All">Vancouver population centre is here</a>. The documentation for the variables from StatCan is included in the assignment git repo as, <a href="https://github.com/ECON567/PharmacyEntry/data/98-401-X2016048_English_meta.txt">https://github.com/ECON567/PharmacyEntry/data/98-401-X2016048_English_meta.txt</a>. The <code>const vars</code> defined at the start of <code>PharmacyEntry/src/census.jl</code> is a list of variables from the census data to extract for future use. Briefly review these and add or delete variables as you see fit. We want variables that are related to either the revenues or costs of pharmacies. It is probably better to err on the side of including too much instead of too little because you can always choose to ignore some variables later.</p>
+<h1 id="part-iii-geocoding">Part III: geocoding</h1>
+<p>We must now link pharmacies and population centres together based on location. Statistics Canada provides shapefiles giving the boundaries of population centres. The <code>loadcensusdata</code> function in <code>census.jl</code> records the latitude and longitude of the geographic center of each population centre. For pharmacies we have have their addresses. There are number of online service that geocode addresses into latitude and longitude. I looked at a few of them and settled on using <a href="https://www.geocod.io/">https://www.geocod.io/</a> for this project. The main reasons I chose this service are that its terms of service allow using and storing data generated from it in any way, and a free account allows enough lookups to complete this project. The function <code>geocode!</code> in <code>geo.jl</code> uses geocod.io to geocode the pharmacy addresses. If you want to run it (e.g. because you scraped pharmacies from additional provinces), you will need to get a free API key by signing up with <a href="https://www.geocod.io/">https://www.geocod.io/</a>. Save the key in a text file named <code>geocodio.key</code> and place it in <code>PharmacyEntry/src/</code>. Let me know if you have any problems or the free key is insufficient.</p>
+<p>Geocoding is imperfect due to typos and errors in the address data, and possibly missing information in geocod.io’s map data. The function <code>checklatlng!</code> partially checks for errors by comparing the latitude and longitude from geocod.io with the boundaries of forward sortation areas (first 3 characters of zip codes). The <code>plotmap</code> function plots population centres and pharmacies. Pharmacies for which the latitude and longitude is not in the boundaries of the forward sortation area of its zip code are red. The others are green. For red pharmacies, the line goes from the pharmacy to the latitude and longitude at the center of its FSA. You can clearly see some pharmacies are misplaced, but other red ones might be okay.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Statistics</span><span class="hljl-t">
+</span><span class="hljl-n">pharm</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">loadpharmacydata</span><span class="hljl-p">()</span>
+</pre>
+<p>reading pharmacy data from /home/paul/565/assignments/PharmacyEntry/data/ph armacies.csv</p>
+<pre class="hljl">
+<span class="hljl-n">census</span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">loadcensusdata</span><span class="hljl-p">()</span><span class="hljl-t">
+
+</span><span class="hljl-nf">checklatlng!</span><span class="hljl-p">(</span><span class="hljl-n">pharm</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:lat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:lng</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:zip</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-nd">@show</span><span class="hljl-t"> </span><span class="hljl-nf">mean</span><span class="hljl-p">(</span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:zipmatch</span><span class="hljl-p">])</span>
+</pre>
+<p>mean(pharm[:zipmatch]) = 0.6708369283865401 0.6708369283865401</p>
+<pre class="hljl">
+<span class="hljl-nf">plotmap</span><span class="hljl-p">(</span><span class="hljl-n">census</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">pharm</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-cs"># Configuration problem with jupyter on vse.syzygy.ca makes PlotlyJS</span><span class="hljl-t">
+</span><span class="hljl-cs"># not display. Problem with Weave.jl also make PlotlyJS not display in</span><span class="hljl-t">
+</span><span class="hljl-cs"># html output ... :(</span><span class="hljl-t">
+</span><span class="hljl-cs">#</span><span class="hljl-t">
+</span><span class="hljl-cs"># Bonus problem: find a way to plot a map that works on vse.syzygy.ca</span>
+</pre>
+<h3 id="problem-5-assign-pharmacies-to-markets">Problem 5: assign pharmacies to markets</h3>
+<p>Decide on some rules for assigning pharmacies to markets (population centres). Implement your choice and create a variable giving the number of pharmacies in each population centre. The function <code>distance_m</code> in <code>geo.jl</code> might be useful. Create tables and/or graphs summarizing the distribution of number of pharmacies similar to Table 2 and Figure 3 from <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span>.</p>
+<h3 id="problem-6-summary-statistics-and-figures">Problem 6: summary statistics and figures</h3>
+<p>Create additional summary statistics and figures.</p>
+<p>This will be continued in a second notebook. Save your data frame to load it there.</p>
+<pre class="hljl">
+<span class="hljl-k">import</span><span class="hljl-t"> </span><span class="hljl-n">CSV</span><span class="hljl-t">
+
+</span><span class="hljl-cs">## For illustration purposes, here&#39;s a quick and dirty assignment of</span><span class="hljl-t">
+</span><span class="hljl-cs">## pharmacies to markets. I would not advise using this exactly.</span><span class="hljl-t">
+</span><span class="hljl-n">subset</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">x</span><span class="hljl-oB">-&gt;</span><span class="hljl-n">x</span><span class="hljl-t"> </span><span class="hljl-oB">∈</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-s">&quot;British Columbia&quot;</span><span class="hljl-p">,</span><span class="hljl-t">
+                  </span><span class="hljl-s">&quot;Manitoba&quot;</span><span class="hljl-p">,</span><span class="hljl-t">
+                  </span><span class="hljl-s">&quot;Manitoba/Saskatchewan&quot;</span><span class="hljl-p">,</span><span class="hljl-t">
+                  </span><span class="hljl-s">&quot;Newfoundland and Labrador&quot;</span><span class="hljl-p">,</span><span class="hljl-t">
+                  </span><span class="hljl-s">&quot;New Brunswick&quot;</span><span class="hljl-p">,</span><span class="hljl-t">
+                  </span><span class="hljl-s">&quot;New Brunswick/Quebec&quot;</span><span class="hljl-p">,</span><span class="hljl-t">
+                  </span><span class="hljl-s">&quot;Prince Edward Island&quot;</span><span class="hljl-p">])</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">census</span><span class="hljl-p">[</span><span class="hljl-sc">:PROV_TERR_NAME_NOM</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">census</span><span class="hljl-p">[</span><span class="hljl-n">subset</span><span class="hljl-p">,</span><span class="hljl-oB">:</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">closestPC</span><span class="hljl-p">(</span><span class="hljl-n">lat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">lng</span><span class="hljl-p">;</span><span class="hljl-t"> </span><span class="hljl-n">data</span><span class="hljl-oB">=</span><span class="hljl-n">df</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-n">d</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">distance_m</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">lng</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">lat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-sc">:lng</span><span class="hljl-p">],</span><span class="hljl-t"> </span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-sc">:lat</span><span class="hljl-p">])</span><span class="hljl-t">
+  </span><span class="hljl-p">(</span><span class="hljl-n">dm</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">findmin</span><span class="hljl-p">(</span><span class="hljl-n">d</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-sc">:GEO_CODE</span><span class="hljl-p">][</span><span class="hljl-n">i</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-k">end</span><span class="hljl-t">
+</span><span class="hljl-n">lat</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:lat</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">lat</span><span class="hljl-p">[</span><span class="hljl-n">ismissing</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">lat</span><span class="hljl-p">)]</span><span class="hljl-t"> </span><span class="hljl-oB">.=</span><span class="hljl-t"> </span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:ziplat</span><span class="hljl-p">][</span><span class="hljl-n">ismissing</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">lat</span><span class="hljl-p">)]</span><span class="hljl-t">
+</span><span class="hljl-n">lng</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:lng</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">lng</span><span class="hljl-p">[</span><span class="hljl-n">ismissing</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">lng</span><span class="hljl-p">)]</span><span class="hljl-t"> </span><span class="hljl-oB">.=</span><span class="hljl-t"> </span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:ziplng</span><span class="hljl-p">][</span><span class="hljl-n">ismissing</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">lng</span><span class="hljl-p">)]</span><span class="hljl-t">
+</span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:pc_geo_code</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t">  </span><span class="hljl-n">closestPC</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">lat</span><span class="hljl-p">,</span><span class="hljl-n">lng</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:pharmacies</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">g</span><span class="hljl-oB">-&gt;</span><span class="hljl-p">(</span><span class="hljl-nf">sum</span><span class="hljl-p">(</span><span class="hljl-n">pharm</span><span class="hljl-p">[</span><span class="hljl-sc">:pc_geo_code</span><span class="hljl-p">]</span><span class="hljl-oB">.==</span><span class="hljl-n">g</span><span class="hljl-p">)))</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:GEO_CODE</span><span class="hljl-p">])</span><span class="hljl-t">
+
+</span><span class="hljl-n">CSV</span><span class="hljl-oB">.</span><span class="hljl-nf">write</span><span class="hljl-p">(</span><span class="hljl-s">&quot;cleandata.csv&quot;</span><span class="hljl-p">,</span><span class="hljl-n">df</span><span class="hljl-p">);</span>
+</pre>
+<h2 id="population-centres-assigned-more-than-10-pharmacies.">Population centres assigned more than 10 pharmacies.</h2>
+<pre class="hljl">
+<span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:pharmacies</span><span class="hljl-p">]</span><span class="hljl-oB">.&gt;</span><span class="hljl-ni">10</span><span class="hljl-p">,[</span><span class="hljl-sc">:GEO_NAME</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:pharmacies</span><span class="hljl-p">,</span><span class="hljl-t">  </span><span class="hljl-sc">:PROV_TERR_NAME_NOM</span><span class="hljl-p">]]</span>
+</pre>
+<table class="data-frame">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+GEO_NAME
+</th>
+<th>
+pharmacies
+</th>
+<th>
+PROV_TERR_NAME_NOM
+</th>
+</tr>
+<tr>
+<th>
+</th>
+<th>
+String⍰
+</th>
+<th>
+Int64
+</th>
+<th>
+String⍰
+</th>
+</tr>
+</thead>
+<tbody>
+<p>
+44 rows × 3 columns
+</p>
+<tr>
+<th>
+1
+</th>
+<td>
+Bathurst
+</td>
+<td>
+11
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+Bay Roberts
+</td>
+<td>
+12
+</td>
+<td>
+Newfoundland and Labrador
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+Beausejour
+</td>
+<td>
+12
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+Brandon
+</td>
+<td>
+20
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+5
+</th>
+<td>
+Campbell River
+</td>
+<td>
+14
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+6
+</th>
+<td>
+Charlottetown
+</td>
+<td>
+22
+</td>
+<td>
+Prince Edward Island
+</td>
+</tr>
+<tr>
+<th>
+7
+</th>
+<td>
+Chilliwack
+</td>
+<td>
+22
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+8
+</th>
+<td>
+Clarenville-Shoal Harbour
+</td>
+<td>
+14
+</td>
+<td>
+Newfoundland and Labrador
+</td>
+</tr>
+<tr>
+<th>
+9
+</th>
+<td>
+Corner Brook
+</td>
+<td>
+12
+</td>
+<td>
+Newfoundland and Labrador
+</td>
+</tr>
+<tr>
+<th>
+10
+</th>
+<td>
+Duncan
+</td>
+<td>
+12
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+11
+</th>
+<td>
+Edmundston
+</td>
+<td>
+25
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+12
+</th>
+<td>
+Fredericton
+</td>
+<td>
+20
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+13
+</th>
+<td>
+Kamloops
+</td>
+<td>
+23
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+14
+</th>
+<td>
+Kelowna
+</td>
+<td>
+38
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+15
+</th>
+<td>
+Moncton
+</td>
+<td>
+35
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+16
+</th>
+<td>
+Nanaimo
+</td>
+<td>
+32
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+17
+</th>
+<td>
+Parksville
+</td>
+<td>
+13
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+18
+</th>
+<td>
+Penticton
+</td>
+<td>
+16
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+19
+</th>
+<td>
+Portage la Prairie
+</td>
+<td>
+12
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+20
+</th>
+<td>
+Prince George
+</td>
+<td>
+21
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+21
+</th>
+<td>
+Prince Rupert
+</td>
+<td>
+12
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+22
+</th>
+<td>
+Saint John
+</td>
+<td>
+22
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+23
+</th>
+<td>
+Selkirk
+</td>
+<td>
+11
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+24
+</th>
+<td>
+St. John’s
+</td>
+<td>
+63
+</td>
+<td>
+Newfoundland and Labrador
+</td>
+</tr>
+<tr>
+<th>
+25
+</th>
+<td>
+Stony Mountain
+</td>
+<td>
+42
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+26
+</th>
+<td>
+Summerside
+</td>
+<td>
+13
+</td>
+<td>
+Prince Edward Island
+</td>
+</tr>
+<tr>
+<th>
+27
+</th>
+<td>
+Vancouver
+</td>
+<td>
+192
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+28
+</th>
+<td>
+Vernon
+</td>
+<td>
+22
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+29
+</th>
+<td>
+Victoria
+</td>
+<td>
+98
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+30
+</th>
+<td>
+White Rock
+</td>
+<td>
+167
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+31
+</th>
+<td>
+Winkler
+</td>
+<td>
+12
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+32
+</th>
+<td>
+Winnipeg
+</td>
+<td>
+156
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+33
+</th>
+<td>
+Abbotsford
+</td>
+<td>
+44
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+34
+</th>
+<td>
+Chatham - Douglastown
+</td>
+<td>
+12
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+35
+</th>
+<td>
+Niverville
+</td>
+<td>
+13
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+36
+</th>
+<td>
+Lions Bay
+</td>
+<td>
+29
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+37
+</th>
+<td>
+Aldergrove
+</td>
+<td>
+31
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+38
+</th>
+<td>
+St. Adolphe
+</td>
+<td>
+39
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+39
+</th>
+<td>
+McEwen
+</td>
+<td>
+17
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+40
+</th>
+<td>
+New Maryland
+</td>
+<td>
+11
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+41
+</th>
+<td>
+Quispamsis - Rothesay
+</td>
+<td>
+11
+</td>
+<td>
+New Brunswick
+</td>
+</tr>
+<tr>
+<th>
+42
+</th>
+<td>
+Ile des Chênes
+</td>
+<td>
+11
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+43
+</th>
+<td>
+Ladner
+</td>
+<td>
+287
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+44
+</th>
+<td>
+Mission
+</td>
+<td>
+11
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="population-centres-with-0-pharmacies">Population centres with 0 pharmacies</h2>
+<pre class="hljl">
+<span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:pharmacies</span><span class="hljl-p">]</span><span class="hljl-oB">.==</span><span class="hljl-ni">0</span><span class="hljl-p">,[</span><span class="hljl-sc">:GEO_NAME</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:pharmacies</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:lat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:lng</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:PROV_TERR_NAME_NOM</span><span class="hljl-p">]]</span>
+</pre>
+<table class="data-frame">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+GEO_NAME
+</th>
+<th>
+pharmacies
+</th>
+<th>
+lat
+</th>
+<th>
+lng
+</th>
+<th>
+PROV_TERR_NAME_NOM
+</th>
+</tr>
+<tr>
+<th>
+</th>
+<th>
+String⍰
+</th>
+<th>
+Int64
+</th>
+<th>
+Float64⍰
+</th>
+<th>
+Float64⍰
+</th>
+<th>
+String⍰
+</th>
+</tr>
+</thead>
+<tbody>
+<p>
+20 rows × 5 columns
+</p>
+<tr>
+<th>
+1
+</th>
+<td>
+Cumberland
+</td>
+<td>
+0
+</td>
+<td>
+49.6242
+</td>
+<td>
+-125.03
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+Fortune
+</td>
+<td>
+0
+</td>
+<td>
+47.0722
+</td>
+<td>
+-55.8248
+</td>
+<td>
+Newfoundland and Labrador
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+Killarney
+</td>
+<td>
+0
+</td>
+<td>
+49.1806
+</td>
+<td>
+-99.6663
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+Logan Lake
+</td>
+<td>
+0
+</td>
+<td>
+50.4904
+</td>
+<td>
+-120.812
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+5
+</th>
+<td>
+Sicamous
+</td>
+<td>
+0
+</td>
+<td>
+50.8233
+</td>
+<td>
+-118.98
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+6
+</th>
+<td>
+Oakbank
+</td>
+<td>
+0
+</td>
+<td>
+49.9375
+</td>
+<td>
+-96.8424
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+7
+</th>
+<td>
+Lorette
+</td>
+<td>
+0
+</td>
+<td>
+49.7411
+</td>
+<td>
+-96.8684
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+8
+</th>
+<td>
+Crofton
+</td>
+<td>
+0
+</td>
+<td>
+48.8712
+</td>
+<td>
+-123.651
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+9
+</th>
+<td>
+Roberts Creek
+</td>
+<td>
+0
+</td>
+<td>
+49.4252
+</td>
+<td>
+-123.644
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+10
+</th>
+<td>
+Harrison Hot Springs
+</td>
+<td>
+0
+</td>
+<td>
+49.2962
+</td>
+<td>
+-121.781
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+11
+</th>
+<td>
+Mitchell
+</td>
+<td>
+0
+</td>
+<td>
+49.5335
+</td>
+<td>
+-96.7636
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+12
+</th>
+<td>
+St. Theresa Point
+</td>
+<td>
+0
+</td>
+<td>
+53.8275
+</td>
+<td>
+-94.8511
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+13
+</th>
+<td>
+Grunthal
+</td>
+<td>
+0
+</td>
+<td>
+49.4065
+</td>
+<td>
+-96.8603
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+14
+</th>
+<td>
+Blumenort
+</td>
+<td>
+0
+</td>
+<td>
+49.6033
+</td>
+<td>
+-96.7006
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+15
+</th>
+<td>
+Landmark
+</td>
+<td>
+0
+</td>
+<td>
+49.6714
+</td>
+<td>
+-96.8177
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+16
+</th>
+<td>
+St-Pierre-Jolys
+</td>
+<td>
+0
+</td>
+<td>
+49.4401
+</td>
+<td>
+-96.9867
+</td>
+<td>
+Manitoba
+</td>
+</tr>
+<tr>
+<th>
+17
+</th>
+<td>
+Canoe
+</td>
+<td>
+0
+</td>
+<td>
+50.7519
+</td>
+<td>
+-119.235
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+18
+</th>
+<td>
+Naramata
+</td>
+<td>
+0
+</td>
+<td>
+49.5929
+</td>
+<td>
+-119.583
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+19
+</th>
+<td>
+Telkwa
+</td>
+<td>
+0
+</td>
+<td>
+54.6893
+</td>
+<td>
+-127.058
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+<tr>
+<th>
+20
+</th>
+<td>
+Cedar
+</td>
+<td>
+0
+</td>
+<td>
+49.1069
+</td>
+<td>
+-123.856
+</td>
+<td>
+British Columbia
+</td>
+</tr>
+</tbody>
+</table>
+<div id="refs" class="references">
+<div id="ref-br1991">
+<p>Bresnahan, Timothy F., and Peter C. Reiss. 1991. “Entry and Competition in Concentrated Markets.” <em>Journal of Political Economy</em> 99 (5): pp. 977–1009. <a href="http://www.jstor.org/stable/2937655">http://www.jstor.org/stable/2937655</a>.</p>
+</div>
+<div id="ref-ellickson2007">
+<p>Ellickson, P.B. 2007. “Does Sutton Apply to Supermarkets?” <em>The RAND Journal of Economics</em> 38 (1): 43–59. <a href="http://onlinelibrary.wiley.com/doi/10.1111/j.1756-2171.2007.tb00043.x/abstract">http://onlinelibrary.wiley.com/doi/10.1111/j.1756-2171.2007.tb00043.x/abstract</a>.</p>
+</div>
+</div>
+
+<HR />
+<div class="footer"><p>
+Published from <a href="pharmacyentry01-dataprep.jmd">pharmacyentry01-dataprep.jmd</a> using
+<a href="http://github.com/mpastell/Weave.jl">Weave.jl</a>  on 2019-03-04.
+<p></div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

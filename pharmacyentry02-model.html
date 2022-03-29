@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Paul Schrimpf">
+  <meta name="dcterms.date" content="2019-03-04">
+  <title>Assignment: pharmacy entry</title>
+
+<!-- TODO check if math works with plotly  -->
+<!-- Need to load plotly before Mathjax or pandoc equations don't work -->
+
+
+<script type="text/javascript">
+  var fileref=document.createElement('script')
+  fileref.setAttribute("type","text/javascript")
+  fileref.setAttribute("src", "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
+  document.getElementsByTagName("head")[0].appendChild(fileref)
+</script>
+
+  <style type="text/css">
+  @font-face {
+    font-style: normal;
+    font-weight: 300;
+  }
+  @font-face {
+    font-style: normal;
+    font-weight: 400;
+  }
+  @font-face {
+    font-style: normal;
+    font-weight: 600;
+  }
+  html {
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 2 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+  }
+  body {
+    margin: 0;
+  }
+  article,
+  aside,
+  details,
+  figcaption,
+  figure,
+  footer,
+  header,
+  hgroup,
+  main,
+  menu,
+  nav,
+  section,
+  summary {
+    display: block;
+  }
+  audio,
+  canvas,
+  progress,
+  video {
+    display: inline-block; /* 1 */
+    vertical-align: baseline; /* 2 */
+  }
+  audio:not([controls]) {
+    display: none;
+    height: 0;
+  }
+  [hidden],
+  template {
+    display: none;
+  }
+  a:active,
+  a:hover {
+    outline: 0;
+  }
+  abbr[title] {
+    border-bottom: 1px dotted;
+  }
+  b,
+  strong {
+    font-weight: bold;
+  }
+  dfn {
+    font-style: italic;
+  }
+  h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+  }
+  mark {
+    background: #ff0;
+    color: #000;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sup {
+    top: -0.5em;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  img {
+    border: 0;
+  }
+  svg:not(:root) {
+    overflow: hidden;
+  }
+  figure {
+    margin: 1em 40px;
+  }
+  hr {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 0;
+  }
+  pre {
+    overflow: auto;
+  }
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    color: inherit; /* 1 */
+    font: inherit; /* 2 */
+    margin: 0; /* 3 */
+  }
+  button {
+    overflow: visible;
+  }
+  button,
+  select {
+    text-transform: none;
+  }
+  button,
+  html input[type="button"], /* 1 */
+  input[type="reset"],
+  input[type="submit"] {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+  }
+  button[disabled],
+  html input[disabled] {
+    cursor: default;
+  }
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+  input {
+    line-height: normal;
+  }
+  input[type="checkbox"],
+  input[type="radio"] {
+    box-sizing: border-box; /* 1 */
+    padding: 0; /* 2 */
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+  }
+  input[type="search"] {
+    -webkit-appearance: textfield; /* 1 */
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box; /* 2 */
+    box-sizing: content-box;
+  }
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+  }
+  legend {
+    border: 0; /* 1 */
+    padding: 0; /* 2 */
+  }
+  textarea {
+    overflow: auto;
+  }
+  optgroup {
+    font-weight: bold;
+  }
+  table {
+    font-family: monospace, monospace;
+    font-size : 0.8em;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  td,
+  th {
+    padding: 0;
+  }
+  thead th {
+      border-bottom: 1px solid black;
+      background-color: white;
+  }
+  tr:nth-child(odd){
+    background-color: rgb(248,248,248);
+  }
+  
+  /*
+  * Skeleton V2.0.4
+  * Copyright 2014, Dave Gamache
+  * www.getskeleton.com
+  * Free to use under the MIT license.
+  * http://www.opensource.org/licenses/mit-license.php
+  * 12/29/2014
+  */
+  .container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box; }
+  .column,
+  .columns {
+    width: 100%;
+    float: left;
+    box-sizing: border-box; }
+  @media (min-width: 400px) {
+    .container {
+      width: 85%;
+      padding: 0; }
+  }
+  @media (min-width: 550px) {
+    .container {
+      width: 80%; }
+    .column,
+    .columns {
+      margin-left: 4%; }
+    .column:first-child,
+    .columns:first-child {
+      margin-left: 0; }
+  
+    .one.column,
+    .one.columns                    { width: 4.66666666667%; }
+    .two.columns                    { width: 13.3333333333%; }
+    .three.columns                  { width: 22%;            }
+    .four.columns                   { width: 30.6666666667%; }
+    .five.columns                   { width: 39.3333333333%; }
+    .six.columns                    { width: 48%;            }
+    .seven.columns                  { width: 56.6666666667%; }
+    .eight.columns                  { width: 65.3333333333%; }
+    .nine.columns                   { width: 74.0%;          }
+    .ten.columns                    { width: 82.6666666667%; }
+    .eleven.columns                 { width: 91.3333333333%; }
+    .twelve.columns                 { width: 100%; margin-left: 0; }
+  
+    .one-third.column               { width: 30.6666666667%; }
+    .two-thirds.column              { width: 65.3333333333%; }
+  
+    .one-half.column                { width: 48%; }
+  
+    /* Offsets */
+    .offset-by-one.column,
+    .offset-by-one.columns          { margin-left: 8.66666666667%; }
+    .offset-by-two.column,
+    .offset-by-two.columns          { margin-left: 17.3333333333%; }
+    .offset-by-three.column,
+    .offset-by-three.columns        { margin-left: 26%;            }
+    .offset-by-four.column,
+    .offset-by-four.columns         { margin-left: 34.6666666667%; }
+    .offset-by-five.column,
+    .offset-by-five.columns         { margin-left: 43.3333333333%; }
+    .offset-by-six.column,
+    .offset-by-six.columns          { margin-left: 52%;            }
+    .offset-by-seven.column,
+    .offset-by-seven.columns        { margin-left: 60.6666666667%; }
+    .offset-by-eight.column,
+    .offset-by-eight.columns        { margin-left: 69.3333333333%; }
+    .offset-by-nine.column,
+    .offset-by-nine.columns         { margin-left: 78.0%;          }
+    .offset-by-ten.column,
+    .offset-by-ten.columns          { margin-left: 86.6666666667%; }
+    .offset-by-eleven.column,
+    .offset-by-eleven.columns       { margin-left: 95.3333333333%; }
+  
+    .offset-by-one-third.column,
+    .offset-by-one-third.columns    { margin-left: 34.6666666667%; }
+    .offset-by-two-thirds.column,
+    .offset-by-two-thirds.columns   { margin-left: 69.3333333333%; }
+  
+    .offset-by-one-half.column,
+    .offset-by-one-half.columns     { margin-left: 52%; }
+  
+  }
+  html {
+    font-size: 62.5%; }
+  body {
+    font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+    line-height: 1.6;
+    font-weight: 400;
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #222; }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    font-weight: 300; }
+  h1 { font-size: 3.6rem; line-height: 1.2;  letter-spacing: -.1rem;}
+  h2 { font-size: 3.4rem; line-height: 1.25; letter-spacing: -.1rem; }
+  h3 { font-size: 3.2rem; line-height: 1.3;  letter-spacing: -.1rem; }
+  h4 { font-size: 2.8rem; line-height: 1.35; letter-spacing: -.08rem; }
+  h5 { font-size: 2.4rem; line-height: 1.5;  letter-spacing: -.05rem; }
+  h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+  
+  p {
+    margin-top: 0; }
+  a {
+    color: #1EAEDB; }
+  a:hover {
+    color: #0FA0CE; }
+  .button,
+  button,
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    display: inline-block;
+    height: 38px;
+    padding: 0 30px;
+    color: #555;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid #bbb;
+    cursor: pointer;
+    box-sizing: border-box; }
+  .button:hover,
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="reset"]:hover,
+  input[type="button"]:hover,
+  .button:focus,
+  button:focus,
+  input[type="submit"]:focus,
+  input[type="reset"]:focus,
+  input[type="button"]:focus {
+    color: #333;
+    border-color: #888;
+    outline: 0; }
+  .button.button-primary,
+  button.button-primary,
+  input[type="submit"].button-primary,
+  input[type="reset"].button-primary,
+  input[type="button"].button-primary {
+    color: #FFF;
+    background-color: #33C3F0;
+    border-color: #33C3F0; }
+  .button.button-primary:hover,
+  button.button-primary:hover,
+  input[type="submit"].button-primary:hover,
+  input[type="reset"].button-primary:hover,
+  input[type="button"].button-primary:hover,
+  .button.button-primary:focus,
+  button.button-primary:focus,
+  input[type="submit"].button-primary:focus,
+  input[type="reset"].button-primary:focus,
+  input[type="button"].button-primary:focus {
+    color: #FFF;
+    background-color: #1EAEDB;
+    border-color: #1EAEDB; }
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  textarea,
+  select {
+    height: 38px;
+    padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+    background-color: #fff;
+    border: 1px solid #D1D1D1;
+    border-radius: 4px;
+    box-shadow: none;
+    box-sizing: border-box; }
+  /* Removes awkward default styles on some inputs for iOS */
+  input[type="email"],
+  input[type="number"],
+  input[type="search"],
+  input[type="text"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="password"],
+  textarea {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none; }
+  textarea {
+    min-height: 65px;
+    padding-top: 6px;
+    padding-bottom: 6px; }
+  input[type="email"]:focus,
+  input[type="number"]:focus,
+  input[type="search"]:focus,
+  input[type="text"]:focus,
+  input[type="tel"]:focus,
+  input[type="url"]:focus,
+  input[type="password"]:focus,
+  textarea:focus,
+  select:focus {
+    border: 1px solid #33C3F0;
+    outline: 0; }
+  label,
+  legend {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 600; }
+  fieldset {
+    padding: 0;
+    border-width: 0; }
+  input[type="checkbox"],
+  input[type="radio"] {
+    display: inline; }
+  label > .label-body {
+    display: inline-block;
+    margin-left: .5rem;
+    font-weight: normal; }
+  ul {
+    list-style: circle inside; }
+  ol {
+    list-style: decimal inside; }
+  ol, ul {
+    padding-left: 0;
+    margin-top: 0; }
+  ul ul,
+  ul ol,
+  ol ol,
+  ol ul {
+    margin: 1.5rem 0 1.5rem 3rem;
+    font-size: 90%; }
+  li {
+    margin-bottom: 1rem; }
+  th,
+  td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #E1E1E1; }
+  th:first-child,
+  td:first-child {
+    padding-left: 0; }
+  th:last-child,
+  td:last-child {
+    padding-right: 0; }
+  button,
+  .button {
+    margin-bottom: 1rem; }
+  input,
+  textarea,
+  select,
+  fieldset {
+    margin-bottom: 1.5rem; }
+  pre,
+  blockquote,
+  dl,
+  figure,
+  table,
+  p,
+  ul,
+  ol,
+  form {
+    margin-bottom: 2.5rem; }
+  .u-full-width {
+    width: 100%;
+    box-sizing: border-box; }
+  .u-max-full-width {
+    max-width: 100%;
+    box-sizing: border-box; }
+  .u-pull-right {
+    float: right; }
+  .u-pull-left {
+    float: left; }
+  hr {
+    margin-top: 3rem;
+    margin-bottom: 3.5rem;
+    border-width: 0;
+    border-top: 1px solid #E1E1E1; }
+  .container:after,
+  .row:after,
+  .u-cf {
+    content: "";
+    display: table;
+    clear: both; }
+  
+  pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  pre.sourceCode.julia {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  pre.julia-error {
+    color : red
+  }
+  
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+  code {
+    background-color: #ffffff;
+    border-radius: 4px;
+  }
+  
+  code.sourceCode.julia {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+  
+  
+  @media (min-width: 400px) {}
+  @media (min-width: 550px) {}
+  @media (min-width: 750px) {}
+  @media (min-width: 1000px) {}
+  @media (min-width: 1200px) {}
+  
+  h1.title {margin-top : 20px}
+  img {max-width : 100%}
+  </style>
+
+
+<style>
+pre.hljl {
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 5px;
+    overflow-x: auto;
+    color: rgb(68,68,68); background-color: rgb(251,251,251); }
+pre.hljl > span.hljl-t { }
+pre.hljl > span.hljl-w { }
+pre.hljl > span.hljl-e { }
+pre.hljl > span.hljl-eB { }
+pre.hljl > span.hljl-o { }
+pre.hljl > span.hljl-k { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kc { color: rgb(59,151,46); font-style: italic; }
+pre.hljl > span.hljl-kd { color: rgb(214,102,97); font-style: italic; }
+pre.hljl > span.hljl-kn { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kp { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kr { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-kt { color: rgb(148,91,176); font-weight: bold; }
+pre.hljl > span.hljl-n { }
+pre.hljl > span.hljl-na { }
+pre.hljl > span.hljl-nb { }
+pre.hljl > span.hljl-nbp { }
+pre.hljl > span.hljl-nc { }
+pre.hljl > span.hljl-ncB { }
+pre.hljl > span.hljl-nd { color: rgb(214,102,97); }
+pre.hljl > span.hljl-ne { }
+pre.hljl > span.hljl-neB { }
+pre.hljl > span.hljl-nf { color: rgb(66,102,213); }
+pre.hljl > span.hljl-nfm { color: rgb(66,102,213); }
+pre.hljl > span.hljl-np { }
+pre.hljl > span.hljl-nl { }
+pre.hljl > span.hljl-nn { }
+pre.hljl > span.hljl-no { }
+pre.hljl > span.hljl-nt { }
+pre.hljl > span.hljl-nv { }
+pre.hljl > span.hljl-nvc { }
+pre.hljl > span.hljl-nvg { }
+pre.hljl > span.hljl-nvi { }
+pre.hljl > span.hljl-nvm { }
+pre.hljl > span.hljl-l { }
+pre.hljl > span.hljl-ld { color: rgb(148,91,176); font-style: italic; }
+pre.hljl > span.hljl-s { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sa { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sb { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sc { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sd { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sdB { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sdC { color: rgb(201,61,57); }
+pre.hljl > span.hljl-se { color: rgb(59,151,46); }
+pre.hljl > span.hljl-sh { color: rgb(201,61,57); }
+pre.hljl > span.hljl-si { }
+pre.hljl > span.hljl-so { color: rgb(201,61,57); }
+pre.hljl > span.hljl-sr { color: rgb(201,61,57); }
+pre.hljl > span.hljl-ss { color: rgb(201,61,57); }
+pre.hljl > span.hljl-ssB { color: rgb(201,61,57); }
+pre.hljl > span.hljl-nB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nbB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nfB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nh { color: rgb(59,151,46); }
+pre.hljl > span.hljl-ni { color: rgb(59,151,46); }
+pre.hljl > span.hljl-nil { color: rgb(59,151,46); }
+pre.hljl > span.hljl-noB { color: rgb(59,151,46); }
+pre.hljl > span.hljl-oB { color: rgb(102,102,102); font-weight: bold; }
+pre.hljl > span.hljl-ow { color: rgb(102,102,102); font-weight: bold; }
+pre.hljl > span.hljl-p { }
+pre.hljl > span.hljl-c { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-ch { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cm { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cp { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cpB { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-cs { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-csB { color: rgb(153,153,119); font-style: italic; }
+pre.hljl > span.hljl-g { }
+pre.hljl > span.hljl-gd { }
+pre.hljl > span.hljl-ge { }
+pre.hljl > span.hljl-geB { }
+pre.hljl > span.hljl-gh { }
+pre.hljl > span.hljl-gi { }
+pre.hljl > span.hljl-go { }
+pre.hljl > span.hljl-gp { }
+pre.hljl > span.hljl-gs { }
+pre.hljl > span.hljl-gsB { }
+pre.hljl > span.hljl-gt { }
+</style>
+
+
+
+</head>
+<body>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12 twelve columns">
+
+
+
+<h1 class="title">Assignment: pharmacy entry</h1>
+<h1 class="subtitle">Part IV-??</h1>
+
+<p><strong>Author:</strong>
+Paul Schrimpf
+<br />
+
+<strong>Date: </strong>2019-03-04
+</p>
+
+<nav id="TOC">
+<ul>
+<li><a href="#part-iv---model">Part IV - Model</a></li>
+</ul>
+</nav>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative
+Commons License" style="border-width:0" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAYAAABjyArgAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAdnJLH8AAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAABh9JREFUaN7tWltPG0cU9nOlIN55KFKRApWoSKu06kuClP4A+gPSUvU1alFbVYpEFYpIq6hVkUVF00rgRnkrFwPGgC/YBtv4srbXhpBXIvGQviF+wYm+s55ldlnbu951WjmMdOT1zOwZ+5sz37ns+oiox+fz0ZV4L0T4qH8JRzdpO75FkcQOxfdilEgnaC+bonQ+TQfFLOVLOSqUC6RUilRSFSpVS5qoCilqkYrlAs/B3Ew+zfcm0wnWFUlEWDfWCO1s0Pr2Gq2Fg7S6uUIroWWW5Y0lWlr/p2tEAvoC3GgyQrv7cUplkpTO7TNYhXKeAazUylQ9Uqn2rEqHx4d09FwTXNee1XgMcxRV4XtwL3SksknWCd1mkIPhVR1kANylIPuM4GZTbIE5JcfWCtAA6szDGbrzyR261nPt0lFAH8ZmfprhuZXDCm8KLDpTyLA17+7vGkDe2Fmnta2gBnJopaUV35+8T0NDQ5fWRh/G3ILRCf06wKAFGVwAU6oqbJX+OT/19fXZ5h3M9f/u53tBIbDmrA5yXKeLzUiINrY1kJtZ8dzjORocGtT1j46O0sTEBAuuRT/mYK5TEDqpXwcYPAlauAC3xJY49umYAbze3l4aHx+nqakpSiaTLLhGH8bkubg3k0tTuaaBDEsGXWicvENbsbCRKiysOPB0kXp6ejR9Y2N0cnJC5oY+jGEO5joBodP6dYDh0MCXoAVYrhlcgAcgz87OqFkLBAIGoLHrABkbho3DGnB8sVSUdna3NaqwsGLxA4VlYQPlJnlpw9piTbsAWOk/PT2lfC7Hgms3+nWAcXzhlMC5ONoyuCMjI5Y726hhE3CPbMnQCU7GGhdUIVnx1hoFN1cNNAHeE5b1/Pi4JcBowtLscKaV/qdPntA7b/cbJBqJtKXfAHCaqSHPDg2cK4PbymrtgAxOhuNjqsinKZnRrJi5OKpxsaAJAbBwOE42F3OFY2r15836YbEA9PZHH9OXn39B33/7nQ6yf3bWsX4DwGy9apGpQTg0HHVVVandBpAFXUAndCOEE1Yc39OsWI4oZJoQDsfccJzFxpmpA004Jjt/Xug/Pz+nwPxfDOZvP/+i61pcWOC+G8PvOdZvABj8WK6VORQTPx6c67YJ3oIghMMJEVycqIdtMk2YAYYnNzeLbMnQcI9dgIV+ADwwMMBgDg4OGvhYWPG/L1860m8AGBmaeqRyLCusV6YGRAvgH+weRAbfPDZbP06iCSuGbnAxMr5LNBEJadGExMOvE2C0cDhMw8PD/H+sAH5x8qJ9gOHccIRFEiEfPSxoFe8CzGAwaDkm3y+ONHQj4wMVZeshWywV42gCPCzCtf+CItDgzODkCvm83re8tKQD7IoiUE84PK7pP1y2QuGs+vv7meQBOK5x/MWYiDQAuBizogmk1SUDD8cM4ZoMcDMn18h63Tg5wbeQmR+nWd69fp2/P57/w52TQ+yLuoL44fIxacbJdvhaPgFYAzHxQfGgJcByGGUX4HbDNNEAqjlM++rePeZoV2Ha/xFgp4mG4Ea3iYZSVJgaIHL83Y5+xxQBx4fQDdcAVaYI85hbiuiqVLmZk2vmyOw4ObHzmpOr8lp2nJwMglyMwWZCP/TKyUy7xZ5O6r8UpokUGaGV+Zg3CtMAsug3j6HBouUwrSCFadFk4zCtq8qVItGQ02RzPOtlorFfTzRQuhSJRqOCT1cU3LMF61TZSR3A61S5qwCWiz2Lfy94X+yZ87NuFHuwlihZyoV3c7GnqwCGTD6Y1MuVdz+7awDZSdEHVm9ZrqwUafrh9Jv4dPniy8Q3X3MYVW2j4I4xzJEL7jc/vMnUgDgbG/iGPr43dvzwYJKTAYAsW3I7j4wAbrlaovk/592+X2CZZJjndGINt3p9Vp0Msqo99AQnO37oOSceeiquwTWDZ3XtBbh21/QEYEEX8mN7gNbqsT2eXPBje7wfUSl6RgutypVertGozuE5wJD3P7hBwY0gh3CIk1X9xZOa9OJJjfvkF0/WQkG6dfuWl68gdYwaGq3VcQuWBWA9+vURxVNx6dWpuuDVqUqRxzDHS2BflwW34viOA3wlLoSI3roConNvV74C8NfodpNElTgAAAAASUVORK5CYII=" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+<h3 id="about-this-document" class="unnumbered">About this document</h3>
+<p>This document was created using Weave.jl. The code is available in <a href="https://github.com/ECON567/PharmacyEntry">on github</a>. The same document generates both static webpages and associated jupyter notebooks.</p>
+<p><span class="math display">\[
+\def\indep{\perp\!\!\!\perp}
+\def\Er{\mathrm{E}}
+\def\R{\mathbb{R}}
+\def\En{{\mathbb{E}_n}}
+\def\Pr{\mathrm{P}}
+\newcommand{\norm}[1]{\left\Vert {#1} \right\Vert}
+\newcommand{\abs}[1]{\left\vert {#1} \right\vert}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\def\inprob{\,{\buildrel p \over \rightarrow}\,} 
+\def\indist{\,{\buildrel d \over \rightarrow}\,} 
+\]</span></p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Pkg</span><span class="hljl-t"> 
+</span><span class="hljl-n">Pkg</span><span class="hljl-oB">.</span><span class="hljl-nf">activate</span><span class="hljl-p">(</span><span class="hljl-s">&quot;..&quot;</span><span class="hljl-p">)</span><span class="hljl-t"> 
+</span><span class="hljl-n">Pkg</span><span class="hljl-oB">.</span><span class="hljl-nf">resolve</span><span class="hljl-p">()</span>
+</pre>
+<p>Resolving package versions… Updating <code>~/565/assignments/PharmacyEntry/Project.toml</code> [no changes] Updating <code>~/565/assignments/PharmacyEntry/Manifest.toml</code> [no changes]</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Revise</span><span class="hljl-t">
+</span><span class="hljl-k">if</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-oB">!</span><span class="hljl-p">(</span><span class="hljl-s">&quot;../src&quot;</span><span class="hljl-t"> </span><span class="hljl-oB">∈</span><span class="hljl-t"> </span><span class="hljl-n">LOAD_PATH</span><span class="hljl-p">))</span><span class="hljl-t">
+  </span><span class="hljl-nf">push!</span><span class="hljl-p">(</span><span class="hljl-n">LOAD_PATH</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-s">&quot;../src&quot;</span><span class="hljl-p">)</span><span class="hljl-t"> 
+</span><span class="hljl-k">end</span><span class="hljl-t">
+</span><span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">PharmacyEntry</span>
+</pre>
+<h3 id="problem-0-rerun-part-1">Problem 0: rerun part 1</h3>
+<p>I have merged everyone’s province specific parsing code, geocoded the pharmacies, and updated the data in the git repository. Update your git folder, and rerun your notebook from part 1 to create a <code>cleandata.csv</code> with data from all the parsed provinces. When complete, cleandata.csv should have about 222 rows (perhaps less if you decided to eliminate population centres that are too big or too close together).</p>
+<h1 id="part-iv---model">Part IV - Model</h1>
+<p>As in <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span>, we will assume that the profits per pharmacy in market <span class="math inline">\(m\)</span> with <span class="math inline">\(N\)</span> pharmacies is</p>
+<p><span class="math display">\[
+\begin{align*}
+    \pi_{m,N} = s_m \underbrace{(\alpha_1 + x_m\beta + \sum_{n=2}^N
+    \alpha_n)}_{\text{variable profits}} - \underbrace{\left(\gamma_1 + \delta
+    w_m + \sum_{n=2}^N \gamma_n \right)}_{\text{fixed costs}} +
+    \epsilon_m 
+\end{align*}
+\]</span></p>
+<p>where <span class="math inline">\(s_m\)</span> is the size of the market. To simplify, I am omitting the <span class="math inline">\(\lambda\)</span> and the other size shifting variables from the model. You may add these if you wish.</p>
+<p>Let <span class="math inline">\(\theta = (\alpha, \beta, \gamma)\)</span> denote the model parameters. If we assume <span class="math inline">\(\epsilon_m\)</span> has cdf <span class="math inline">\(F_\epsilon()\)</span> (conditional on <span class="math inline">\(s\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(w\)</span>), then the likelihood of observing <span class="math inline">\(N_m\)</span> pharmacies in market <span class="math inline">\(m\)</span> is</p>
+<p><span class="math display">\[
+\begin{align*}
+   P(N = N_m | s_m, x_m, w_m; \theta) = &amp; P(\pi_{m,N} \geq 0 \;\&amp;\;
+   \pi_{m,N+1} &lt; 0) \\
+   = &amp; P\left(-\left[s_m (\alpha_1 + x_m\beta + \sum_{n=2}^{N_m}
+    \alpha_n) - \left(\gamma_1 + \delta
+    w_m + \sum_{n=2}^{N_m} \gamma_n \right)\right] \leq
+    \epsilon_m \leq -\left[s_m (\alpha_1 + x_m\beta + \sum_{n=2}^{N_m+1}
+    \alpha_n) - \left(\gamma_1 + \delta
+    w_m + \sum_{n=2}^{N_m+1} \gamma_n \right)\right] \right) \\
+   = &amp; F_\epsilon\left(-\left[s_m (\alpha_1 + x_m\beta + \sum_{n=2}^{N_m+1}
+    \alpha_n) - \left(\gamma_1 + \delta
+    w_m + \sum_{n=2}^{N_m+1} \gamma_n \right)\right]\right) -
+    F_\epsilon\left( -\left[s_m (\alpha_1 + x_m\beta + \sum_{n=2}^{N_m}
+    \alpha_n) - \left(\gamma_1 + \delta
+    w_m + \sum_{n=2}^{N_m} \gamma_n \right)\right] \right)
+\end{align*}
+\]</span></p>
+<p>The loglikelihood is then</p>
+<p><span class="math display">\[
+\mathcal{L}(\theta) = \frac{1}{M} \sum_{m=1}^M \log P(N = N_m | s_m, x_m, w_m;
+\theta),
+\]</span></p>
+<p>and <span class="math inline">\(\theta\)</span> can be estimated by maximizing,</p>
+<p><span class="math display">\[
+\hat{\theta} = \argmax_\theta \mathcal{L}(\theta).
+\]</span></p>
+<h3 id="problem-1-loglikelihood">Problem 1: loglikelihood</h3>
+<p>Write a function to compute the loglikelihood. You may do this however you want, but I suggest using the following skeleton code.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Distributions</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">DataFrames</span><span class="hljl-t">
+
+</span><span class="hljl-s">&quot;&quot;&quot;
+         brentrymodel(data::AbstractDataFrame,
+                      n::Symbol,
+                      s::Symbol,
+                      x::Array{Symbol,1},
+                      w::Array{Symbol,1};
+                      Fϵ)
+
+Create loglikelihood for Bresnehan &amp; Reiss style entry model
+
+Inputs:
+- `data` DataFrame 
+- `n` name of number of firm variable in data
+- `s` name of market size variable in data
+- `x` array of names of variable profit shifters
+- `w` array of names of fixed cost shifters 
+- `Fϵ` cdf of ϵ, optional, defaults to standard normal cdf
+
+The same variables may be included in both `x` and `w`.
+&quot;&quot;&quot;</span><span class="hljl-t">
+</span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">brentrymodel</span><span class="hljl-p">(</span><span class="hljl-n">data</span><span class="hljl-oB">::</span><span class="hljl-n">AbstractDataFrame</span><span class="hljl-p">,</span><span class="hljl-t">
+                      </span><span class="hljl-n">n</span><span class="hljl-oB">::</span><span class="hljl-n">Symbol</span><span class="hljl-p">,</span><span class="hljl-t">
+                      </span><span class="hljl-n">s</span><span class="hljl-oB">::</span><span class="hljl-n">Symbol</span><span class="hljl-p">,</span><span class="hljl-t">
+                      </span><span class="hljl-n">x</span><span class="hljl-oB">::</span><span class="hljl-nf">Array</span><span class="hljl-p">{</span><span class="hljl-n">Symbol</span><span class="hljl-p">,</span><span class="hljl-ni">1</span><span class="hljl-p">},</span><span class="hljl-t">
+                      </span><span class="hljl-n">w</span><span class="hljl-oB">::</span><span class="hljl-nf">Array</span><span class="hljl-p">{</span><span class="hljl-n">Symbol</span><span class="hljl-p">,</span><span class="hljl-ni">1</span><span class="hljl-p">};</span><span class="hljl-t">
+                      </span><span class="hljl-n">Fϵ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">x</span><span class="hljl-oB">-&gt;</span><span class="hljl-nf">cdf</span><span class="hljl-p">(</span><span class="hljl-nf">Normal</span><span class="hljl-p">(),</span><span class="hljl-n">x</span><span class="hljl-p">))</span><span class="hljl-t">
+  </span><span class="hljl-cs"># skip observations with missings</span><span class="hljl-t">
+  </span><span class="hljl-n">vars</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">unique</span><span class="hljl-p">([</span><span class="hljl-n">n</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">s</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">x</span><span class="hljl-oB">...</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">w</span><span class="hljl-oB">...</span><span class="hljl-p">])</span><span class="hljl-t">
+  </span><span class="hljl-n">inc</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">completecases</span><span class="hljl-p">(</span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-n">vars</span><span class="hljl-p">])</span><span class="hljl-t">
+
+  </span><span class="hljl-n">N</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">disallowmissing</span><span class="hljl-p">(</span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-n">n</span><span class="hljl-p">][</span><span class="hljl-n">inc</span><span class="hljl-p">])</span><span class="hljl-t">
+  </span><span class="hljl-n">S</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">disallowmissing</span><span class="hljl-p">(</span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-n">s</span><span class="hljl-p">][</span><span class="hljl-n">inc</span><span class="hljl-p">])</span><span class="hljl-t">
+  </span><span class="hljl-n">X</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">disallowmissing</span><span class="hljl-p">(</span><span class="hljl-nf">convert</span><span class="hljl-p">(</span><span class="hljl-n">Matrix</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-n">x</span><span class="hljl-p">][</span><span class="hljl-n">inc</span><span class="hljl-p">,</span><span class="hljl-oB">:</span><span class="hljl-p">]))</span><span class="hljl-t">
+  </span><span class="hljl-n">W</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">disallowmissing</span><span class="hljl-p">(</span><span class="hljl-nf">convert</span><span class="hljl-p">(</span><span class="hljl-n">Matrix</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">data</span><span class="hljl-p">[</span><span class="hljl-n">w</span><span class="hljl-p">][</span><span class="hljl-n">inc</span><span class="hljl-p">,</span><span class="hljl-oB">:</span><span class="hljl-p">]))</span><span class="hljl-t">
+  </span><span class="hljl-n">Nmax</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">maximum</span><span class="hljl-p">(</span><span class="hljl-n">N</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">packparam</span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">,</span><span class="hljl-n">β</span><span class="hljl-p">,</span><span class="hljl-n">γ</span><span class="hljl-p">,</span><span class="hljl-n">δ</span><span class="hljl-p">)</span><span class="hljl-t">
+    </span><span class="hljl-n">θ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-n">α</span><span class="hljl-p">;</span><span class="hljl-n">β</span><span class="hljl-p">;</span><span class="hljl-n">γ</span><span class="hljl-p">;</span><span class="hljl-n">δ</span><span class="hljl-p">]</span><span class="hljl-t">
+  </span><span class="hljl-k">end</span><span class="hljl-t">
+  </span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">unpackparam</span><span class="hljl-p">(</span><span class="hljl-n">θ</span><span class="hljl-p">)</span><span class="hljl-t">
+    </span><span class="hljl-n">α</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[</span><span class="hljl-ni">1</span><span class="hljl-oB">:</span><span class="hljl-n">Nmax</span><span class="hljl-p">]</span><span class="hljl-t">
+    </span><span class="hljl-n">β</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[(</span><span class="hljl-n">Nmax</span><span class="hljl-oB">+</span><span class="hljl-ni">1</span><span class="hljl-p">)</span><span class="hljl-oB">:</span><span class="hljl-p">(</span><span class="hljl-n">Nmax</span><span class="hljl-oB">+</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">X</span><span class="hljl-p">,</span><span class="hljl-ni">2</span><span class="hljl-p">))]</span><span class="hljl-t">
+    </span><span class="hljl-n">γ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[(</span><span class="hljl-n">Nmax</span><span class="hljl-oB">+</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">X</span><span class="hljl-p">,</span><span class="hljl-ni">2</span><span class="hljl-p">)</span><span class="hljl-oB">+</span><span class="hljl-ni">1</span><span class="hljl-p">)</span><span class="hljl-oB">:</span><span class="hljl-p">(</span><span class="hljl-n">Nmax</span><span class="hljl-oB">+</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">X</span><span class="hljl-p">,</span><span class="hljl-ni">2</span><span class="hljl-p">)</span><span class="hljl-oB">+</span><span class="hljl-n">Nmax</span><span class="hljl-p">)]</span><span class="hljl-t">
+    </span><span class="hljl-n">δ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[(</span><span class="hljl-n">Nmax</span><span class="hljl-oB">+</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">X</span><span class="hljl-p">,</span><span class="hljl-ni">2</span><span class="hljl-p">)</span><span class="hljl-oB">+</span><span class="hljl-n">Nmax</span><span class="hljl-oB">+</span><span class="hljl-ni">1</span><span class="hljl-p">)</span><span class="hljl-oB">:</span><span class="hljl-k">end</span><span class="hljl-p">]</span><span class="hljl-t">
+    </span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">,</span><span class="hljl-n">β</span><span class="hljl-p">,</span><span class="hljl-n">γ</span><span class="hljl-p">,</span><span class="hljl-n">δ</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-k">end</span><span class="hljl-t">
+
+  </span><span class="hljl-cs"># While maximizing the likelihood some parameters might result in</span><span class="hljl-t">
+  </span><span class="hljl-cs"># the likelihood being 0 (or very close to 0) taking log would </span><span class="hljl-t">
+  </span><span class="hljl-cs"># create problems. Use logfinite from PharmacyEntry.jl instead</span><span class="hljl-t">
+  </span><span class="hljl-n">logf</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">logfinite</span><span class="hljl-p">(</span><span class="hljl-nf">exp</span><span class="hljl-p">(</span><span class="hljl-oB">-</span><span class="hljl-nfB">100.0</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-cs"># could adjust the exp(-100.0)</span><span class="hljl-t">
+
+  </span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">loglike</span><span class="hljl-p">(</span><span class="hljl-n">θ</span><span class="hljl-p">)</span><span class="hljl-t">
+    </span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">,</span><span class="hljl-n">β</span><span class="hljl-p">,</span><span class="hljl-n">γ</span><span class="hljl-p">,</span><span class="hljl-n">δ</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">unpackparam</span><span class="hljl-p">(</span><span class="hljl-n">θ</span><span class="hljl-p">)</span><span class="hljl-t">
+    </span><span class="hljl-nf">error</span><span class="hljl-p">(</span><span class="hljl-s">&quot;You must write the body of this function&quot;</span><span class="hljl-p">)</span><span class="hljl-t">
+    </span><span class="hljl-cs"># P = array of likelihoods for each observation</span><span class="hljl-t">
+    </span><span class="hljl-cs"># return(mean(logf.(P))) </span><span class="hljl-t">
+  </span><span class="hljl-k">end</span><span class="hljl-t">
+  
+  </span><span class="hljl-k">return</span><span class="hljl-p">(</span><span class="hljl-n">loglike</span><span class="hljl-oB">=</span><span class="hljl-n">loglike</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">unpack</span><span class="hljl-oB">=</span><span class="hljl-n">unpackparam</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">pack</span><span class="hljl-oB">=</span><span class="hljl-n">packparam</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-k">end</span>
+</pre>
+<h3 id="problem-2-estimate-on-simulated-data">Problem 2: estimate on simulated data</h3>
+<p>It is good practice to test any estimation method on simulated data. The function <code>brentrysim</code> in <code>PharmacyEntry/src/entrymodel.jl</code> simulates this model. Use it to test your likelihood. Here is some code to simulate. You may need to adjust the parameters to get a decent distribution of number of firms (i.e. not all 0 or 5).</p>
+<pre class="hljl">
+<span class="hljl-cs"># Simulating data</span><span class="hljl-t">
+</span><span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">DataFrames</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">Statistics</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">StatsBase</span><span class="hljl-t">
+</span><span class="hljl-k">import</span><span class="hljl-t"> </span><span class="hljl-n">CSV</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">CSV</span><span class="hljl-oB">.</span><span class="hljl-nf">read</span><span class="hljl-p">(</span><span class="hljl-s">&quot;cleandata.csv&quot;</span><span class="hljl-p">)</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># Important to scale variables to avoid numerical problems in both</span><span class="hljl-t">
+</span><span class="hljl-cs"># simulation &amp; estimation</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:pop10k</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-nf">Symbol</span><span class="hljl-p">(</span><span class="hljl-s">&quot;Population, 2016&quot;</span><span class="hljl-p">)]</span><span class="hljl-oB">./</span><span class="hljl-ni">10000</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:logpop10k</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">log</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:pop10k</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:income10k</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-nf">Symbol</span><span class="hljl-p">(</span><span class="hljl-s">&quot;Average total income in 2015 among recipients (</span><span class="hljl-se">\$</span><span class="hljl-s">)&quot;</span><span class="hljl-p">)]</span><span class="hljl-oB">./</span><span class="hljl-ni">10000</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:density1k</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-nf">Symbol</span><span class="hljl-p">(</span><span class="hljl-s">&quot;Population density per square kilometre&quot;</span><span class="hljl-p">)]</span><span class="hljl-oB">./</span><span class="hljl-ni">1000</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:logdensity</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">log</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:density1k</span><span class="hljl-p">])</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:logarea</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">log</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-nf">Symbol</span><span class="hljl-p">(</span><span class="hljl-s">&quot;Land area in square kilometres&quot;</span><span class="hljl-p">)])</span><span class="hljl-t">
+</span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-sc">:mediumage</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-nf">Symbol</span><span class="hljl-p">(</span><span class="hljl-s">&quot;15 to 64 years&quot;</span><span class="hljl-p">)]</span><span class="hljl-oB">./</span><span class="hljl-ni">100</span><span class="hljl-t">
+</span><span class="hljl-cs"># parameters for simulation</span><span class="hljl-t">
+</span><span class="hljl-n">n_obs_sim</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-ni">500</span><span class="hljl-t"> </span><span class="hljl-cs"># you might want to adjust this. You want it to be</span><span class="hljl-t">
+                </span><span class="hljl-cs"># large enough that your estimates are close to the</span><span class="hljl-t">
+                </span><span class="hljl-cs"># true values, but small enough that it doesn&#39;t take</span><span class="hljl-t">
+                </span><span class="hljl-cs"># too long to estimate</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># the maximum number of pharmacies in the simulated data will be</span><span class="hljl-t">
+</span><span class="hljl-cs"># length(α) + 1</span><span class="hljl-t">
+</span><span class="hljl-n">α</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-nfB">1.0</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-oB">-</span><span class="hljl-nfB">1.</span><span class="hljl-p">]</span><span class="hljl-t">  
+</span><span class="hljl-n">γ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-nfB">1.0</span><span class="hljl-p">,</span><span class="hljl-t">  </span><span class="hljl-nfB">1.</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-cs"># you may have to adjust the parameters to get a reasonable distribution of</span><span class="hljl-t">
+</span><span class="hljl-cs"># number of pharmacies across markets</span><span class="hljl-t">
+</span><span class="hljl-n">svar</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-sc">:pop10k</span><span class="hljl-t">
+</span><span class="hljl-n">β</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-nfB">1.</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-nfB">1.</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">xvars</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-sc">:income10k</span><span class="hljl-p">,</span><span class="hljl-t">
+         </span><span class="hljl-sc">:mediumage</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">δ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-nfB">1.</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-nfB">1.</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">wvars</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-sc">:logdensity</span><span class="hljl-p">,</span><span class="hljl-t">
+         </span><span class="hljl-sc">:logarea</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">simdf</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">df</span><span class="hljl-p">[</span><span class="hljl-nf">sample</span><span class="hljl-p">(</span><span class="hljl-ni">1</span><span class="hljl-oB">:</span><span class="hljl-nf">nrow</span><span class="hljl-p">(</span><span class="hljl-n">df</span><span class="hljl-p">),</span><span class="hljl-t"> </span><span class="hljl-n">n_obs_sim</span><span class="hljl-p">),</span><span class="hljl-oB">:</span><span class="hljl-p">]</span><span class="hljl-t">
+
+</span><span class="hljl-n">simdf</span><span class="hljl-p">[</span><span class="hljl-sc">:nsim</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">brentrysim</span><span class="hljl-p">(</span><span class="hljl-n">simdf</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">svar</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">xvars</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">wvars</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">α</span><span class="hljl-p">,</span><span class="hljl-n">β</span><span class="hljl-p">,</span><span class="hljl-n">γ</span><span class="hljl-p">,</span><span class="hljl-n">δ</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-nf">println</span><span class="hljl-p">(</span><span class="hljl-s">&quot;Distribution of number of firms&quot;</span><span class="hljl-p">)</span>
+</pre>
+<p>Distribution of number of firms</p>
+<pre class="hljl">
+<span class="hljl-k">for</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-t"> </span><span class="hljl-kp">in</span><span class="hljl-t"> </span><span class="hljl-ni">0</span><span class="hljl-oB">:</span><span class="hljl-nf">length</span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-nf">println</span><span class="hljl-p">(</span><span class="hljl-s">&quot;</span><span class="hljl-si">$</span><span class="hljl-p">(</span><span class="hljl-nf">mean</span><span class="hljl-p">(</span><span class="hljl-n">simdf</span><span class="hljl-p">[</span><span class="hljl-sc">:nsim</span><span class="hljl-p">]</span><span class="hljl-oB">.==</span><span class="hljl-n">i</span><span class="hljl-p">))</span><span class="hljl-s">&quot;</span><span class="hljl-p">)</span><span class="hljl-t"> 
+</span><span class="hljl-k">end</span>
+</pre>
+<p>0.434 0.272 0.294</p>
+<p>To estimate from the simulated data, you could do the following.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">Optim</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">ForwardDiff</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">LinearAlgebra</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">PrettyTables</span><span class="hljl-t">
+</span><span class="hljl-k">try</span><span class="hljl-t"> 
+  </span><span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">EntrySolution</span><span class="hljl-t">
+  </span><span class="hljl-cs"># this contains my code for the likelihood and</span><span class="hljl-t">
+  </span><span class="hljl-cs"># it&#39;s intentionally not included in the assignment</span><span class="hljl-t">
+</span><span class="hljl-k">catch</span><span class="hljl-t">
+</span><span class="hljl-k">end</span><span class="hljl-t">
+
+</span><span class="hljl-p">(</span><span class="hljl-n">loglike</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">unpack</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">pack</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">brentrymodel</span><span class="hljl-p">(</span><span class="hljl-n">simdf</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-sc">:nsim</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">svar</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">xvars</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">wvars</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">θ0</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">pack</span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">,</span><span class="hljl-n">β</span><span class="hljl-p">,</span><span class="hljl-n">γ</span><span class="hljl-p">,</span><span class="hljl-n">δ</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-nf">loglike</span><span class="hljl-p">(</span><span class="hljl-n">θ0</span><span class="hljl-p">)</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># initial values --- note that you may run into optimization problems</span><span class="hljl-t">
+</span><span class="hljl-cs"># with poor initial values. This is especially likely if</span><span class="hljl-t">
+</span><span class="hljl-cs"># s*cumsum(α)[c] - cumsum(γ)[c] is not decreasing with c. You can</span><span class="hljl-t">
+</span><span class="hljl-cs"># ensure this by making α &lt; 0 and γ&gt;0</span><span class="hljl-t">
+</span><span class="hljl-n">βi</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">zeros</span><span class="hljl-p">(</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">β</span><span class="hljl-p">))</span><span class="hljl-t">
+</span><span class="hljl-n">δi</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">zeros</span><span class="hljl-p">(</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">δ</span><span class="hljl-p">))</span><span class="hljl-t">
+</span><span class="hljl-n">αi</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">zeros</span><span class="hljl-p">(</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">))</span><span class="hljl-t">
+</span><span class="hljl-n">γi</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">ones</span><span class="hljl-p">(</span><span class="hljl-nf">size</span><span class="hljl-p">(</span><span class="hljl-n">γ</span><span class="hljl-p">))</span><span class="hljl-t">
+</span><span class="hljl-n">θi</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">pack</span><span class="hljl-p">(</span><span class="hljl-n">αi</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">βi</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">γi</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">δi</span><span class="hljl-p">);</span><span class="hljl-t">
+</span><span class="hljl-nf">loglike</span><span class="hljl-p">(</span><span class="hljl-n">θi</span><span class="hljl-p">)</span><span class="hljl-t">
+
+</span><span class="hljl-n">res</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">optimize</span><span class="hljl-p">((</span><span class="hljl-n">x</span><span class="hljl-p">)</span><span class="hljl-oB">-&gt;</span><span class="hljl-p">(</span><span class="hljl-oB">-</span><span class="hljl-nf">loglike</span><span class="hljl-p">(</span><span class="hljl-n">x</span><span class="hljl-p">)),</span><span class="hljl-t"> </span><span class="hljl-n">θi</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">method</span><span class="hljl-oB">=</span><span class="hljl-nf">BFGS</span><span class="hljl-p">(),</span><span class="hljl-t">
+               </span><span class="hljl-n">autodiff</span><span class="hljl-oB">=:</span><span class="hljl-n">forward</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">show_trace</span><span class="hljl-oB">=</span><span class="hljl-kc">true</span><span class="hljl-p">)</span>
+</pre>
+<p>Iter Function value Gradient norm 0 1.730088e+00 1.620804e+01 1 1.209517e+00 1.288377e+00 2 7.222989e-01 1.781650e-01 3 6.718382e-01 1.838065e-01 4 6.654975e-01 3.980007e-02 5 6.515625e-01 1.764305e-02 6 6.508047e-01 1.661900e-02 7 6.504096e-01 1.809850e-02 8 6.486085e-01 1.025959e-02 9 6.479257e-01 2.199461e-02 10 6.468372e-01 2.803841e-03 11 6.468231e-01 1.912744e-03 12 6.465327e-01 5.307883e-03 13 6.462838e-01 2.957066e-03 14 6.462581e-01 4.557924e-03 15 6.457693e-01 2.721388e-03 16 6.457607e-01 4.537976e-04 17 6.457601e-01 4.817264e-04 18 6.454308e-01 1.765586e-02 19 6.451313e-01 4.076670e-04 20 6.451306e-01 2.094665e-05 21 6.451306e-01 2.697787e-07 22 6.451306e-01 6.725598e-10</p>
+<pre class="hljl">
+<span class="hljl-cs"># if you have problems, maybe look at one parameter at a time, e.g.</span><span class="hljl-t">
+</span><span class="hljl-cs"># res = optimize((x)-&gt;(-loglike(pack(x, β, γ, δ))), αi, method=BFGS(), autodiff=:forward, show_trace=true) </span><span class="hljl-t">
+</span><span class="hljl-n">θhat</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">res</span><span class="hljl-oB">.</span><span class="hljl-n">minimizer</span><span class="hljl-t">
+</span><span class="hljl-p">(</span><span class="hljl-n">αhat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">βhat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">γhat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">δhat</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">unpack</span><span class="hljl-p">(</span><span class="hljl-n">θhat</span><span class="hljl-p">)</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># calculate standard errors</span><span class="hljl-t">
+</span><span class="hljl-n">H</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">ForwardDiff</span><span class="hljl-oB">.</span><span class="hljl-nf">hessian</span><span class="hljl-p">(</span><span class="hljl-n">loglike</span><span class="hljl-p">,</span><span class="hljl-n">θhat</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">Varθ</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-oB">-</span><span class="hljl-nf">inv</span><span class="hljl-p">(</span><span class="hljl-n">H</span><span class="hljl-p">)</span><span class="hljl-oB">./</span><span class="hljl-nf">nrow</span><span class="hljl-p">(</span><span class="hljl-n">simdf</span><span class="hljl-p">);</span><span class="hljl-t">
+</span><span class="hljl-p">(</span><span class="hljl-n">seα</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">seβ</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">seγ</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">seδ</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">unpack</span><span class="hljl-p">(</span><span class="hljl-n">sqrt</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-nf">diag</span><span class="hljl-p">(</span><span class="hljl-n">Varθ</span><span class="hljl-p">)))</span><span class="hljl-t">
+
+</span><span class="hljl-cs"># Print a nice(ish) table</span><span class="hljl-t">
+</span><span class="hljl-n">header</span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-s">&quot;Parameter&quot;</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-s">&quot;Truth&quot;</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-s">&quot;Estimate&quot;</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-s">&quot;(SE)&quot;</span><span class="hljl-p">];</span><span class="hljl-t">
+</span><span class="hljl-n">param</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[[</span><span class="hljl-s">&quot;α[</span><span class="hljl-si">$i</span><span class="hljl-s">]&quot;</span><span class="hljl-t"> </span><span class="hljl-k">for</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-t"> </span><span class="hljl-kp">in</span><span class="hljl-t"> </span><span class="hljl-nf">eachindex</span><span class="hljl-p">(</span><span class="hljl-n">α</span><span class="hljl-p">)];</span><span class="hljl-t">
+         </span><span class="hljl-p">[</span><span class="hljl-s">&quot;β[</span><span class="hljl-si">$i</span><span class="hljl-s">]&quot;</span><span class="hljl-t"> </span><span class="hljl-k">for</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-t"> </span><span class="hljl-kp">in</span><span class="hljl-t"> </span><span class="hljl-nf">eachindex</span><span class="hljl-p">(</span><span class="hljl-n">β</span><span class="hljl-p">)];</span><span class="hljl-t">
+         </span><span class="hljl-p">[</span><span class="hljl-s">&quot;γ[</span><span class="hljl-si">$i</span><span class="hljl-s">]&quot;</span><span class="hljl-t"> </span><span class="hljl-k">for</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-t"> </span><span class="hljl-kp">in</span><span class="hljl-t"> </span><span class="hljl-nf">eachindex</span><span class="hljl-p">(</span><span class="hljl-n">γ</span><span class="hljl-p">)];</span><span class="hljl-t">
+         </span><span class="hljl-p">[</span><span class="hljl-s">&quot;δ[</span><span class="hljl-si">$i</span><span class="hljl-s">]&quot;</span><span class="hljl-t"> </span><span class="hljl-k">for</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-t"> </span><span class="hljl-kp">in</span><span class="hljl-t"> </span><span class="hljl-nf">eachindex</span><span class="hljl-p">(</span><span class="hljl-n">δ</span><span class="hljl-p">)]];</span><span class="hljl-t">
+</span><span class="hljl-cs"># highlight estimates that reject H0 : estimate = true at 99% level</span><span class="hljl-t">
+</span><span class="hljl-n">h1</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">Highlighter</span><span class="hljl-p">(</span><span class="hljl-t">
+  </span><span class="hljl-n">f</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">tbl</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">i</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">j</span><span class="hljl-p">)</span><span class="hljl-oB">-&gt;</span><span class="hljl-p">(</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">j</span><span class="hljl-oB">==</span><span class="hljl-ni">3</span><span class="hljl-t"> </span><span class="hljl-oB">||</span><span class="hljl-t"> </span><span class="hljl-n">j</span><span class="hljl-oB">==</span><span class="hljl-ni">4</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">&amp;&amp;</span><span class="hljl-t">
+                   </span><span class="hljl-nf">abs</span><span class="hljl-p">((</span><span class="hljl-n">tbl</span><span class="hljl-p">[</span><span class="hljl-n">i</span><span class="hljl-p">,</span><span class="hljl-ni">2</span><span class="hljl-p">]</span><span class="hljl-oB">-</span><span class="hljl-n">tbl</span><span class="hljl-p">[</span><span class="hljl-n">i</span><span class="hljl-p">,</span><span class="hljl-ni">3</span><span class="hljl-p">])</span><span class="hljl-oB">/</span><span class="hljl-n">tbl</span><span class="hljl-p">[</span><span class="hljl-n">i</span><span class="hljl-p">,</span><span class="hljl-ni">4</span><span class="hljl-p">])</span><span class="hljl-oB">.&gt;</span><span class="hljl-nf">quantile</span><span class="hljl-p">(</span><span class="hljl-nf">Normal</span><span class="hljl-p">(),</span><span class="hljl-t">
+                                                               </span><span class="hljl-nfB">0.995</span><span class="hljl-p">)),</span><span class="hljl-t">
+  </span><span class="hljl-n">crayon</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">crayon</span><span class="hljl-s">&quot;red bold&quot;</span><span class="hljl-t">
+</span><span class="hljl-p">);</span>
+</pre>
+<pre class="hljl">
+<span class="hljl-nB">julia&gt; </span><span class="hljl-n">tbl</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">pretty_table</span><span class="hljl-p">(</span><span class="hljl-nf">hcat</span><span class="hljl-p">(</span><span class="hljl-n">param</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">θ0</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">θhat</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">sqrt</span><span class="hljl-oB">.</span><span class="hljl-p">(</span><span class="hljl-nf">diag</span><span class="hljl-p">(</span><span class="hljl-n">Varθ</span><span class="hljl-p">))),</span><span class="hljl-t"> </span><span class="hljl-n">header</span><span class="hljl-p">,</span><span class="hljl-t">
+                   </span><span class="hljl-n">formatter</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">Dict</span><span class="hljl-p">(</span><span class="hljl-ni">3</span><span class="hljl-t"> </span><span class="hljl-oB">=&gt;</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">v</span><span class="hljl-p">,</span><span class="hljl-n">i</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">-&gt;</span><span class="hljl-t"> </span><span class="hljl-nf">round</span><span class="hljl-p">(</span><span class="hljl-n">v</span><span class="hljl-p">,</span><span class="hljl-n">digits</span><span class="hljl-oB">=</span><span class="hljl-ni">3</span><span class="hljl-p">),</span><span class="hljl-t">
+                                    </span><span class="hljl-ni">4</span><span class="hljl-t"> </span><span class="hljl-oB">=&gt;</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">v</span><span class="hljl-p">,</span><span class="hljl-n">i</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">-&gt;</span><span class="hljl-t"> </span><span class="hljl-s">&quot;(</span><span class="hljl-si">$</span><span class="hljl-p">(</span><span class="hljl-nf">round</span><span class="hljl-p">(</span><span class="hljl-n">v</span><span class="hljl-p">,</span><span class="hljl-n">digits</span><span class="hljl-oB">=</span><span class="hljl-ni">3</span><span class="hljl-p">))</span><span class="hljl-s">)&quot;</span><span class="hljl-p">),</span><span class="hljl-t">
+                   </span><span class="hljl-n">highlighters</span><span class="hljl-oB">=</span><span class="hljl-nf">tuple</span><span class="hljl-p">(</span><span class="hljl-n">h1</span><span class="hljl-p">))</span><span class="hljl-t">
+</span><span class="hljl-n">┌───────────┬───────┬──────────┬─────────┐</span><span class="hljl-t">───────────┬───────┬──────────┬─────────┐
+│ Parameter │ Truth │ Estimate │    (SE) │
+├───────────┼───────┼──────────┼─────────┤
+│      α[1] │   1.0 │    2.814 │ (1.842) │
+│      α[2] │  -1.0 │    -0.56 │ (0.487) │
+│      β[1] │   1.0 │    0.836 │ (0.267) │
+│      β[2] │   1.0 │   -2.325 │ (3.307) │
+│      γ[1] │   1.0 │    0.955 │ (0.135) │
+│      γ[2] │   1.0 │    1.179 │ (0.195) │
+│      δ[1] │   1.0 │    0.461 │ (0.334) │
+│      δ[2] │   1.0 │     0.65 │ (0.302) │
+└───────────┴───────┴──────────┴─────────┘</span>
+</pre>
+<p>Ideally, you would do this many times, and verify that as the sample size increases, the estimates are close to the true parameters. Note that maximum likelihood is generally only consistent, not unbiased. Also, I have semi-deliberately setup the simulation so that there is a pair of parameters that are not well identified separately. Can you figure out what the problem is?</p>
+<h3 id="problem-3-estimation">Problem 3: estimation</h3>
+<p>Estimate the model on the real data. oBriefly discuss your choice of “X” and “W” variables. Be sure to check the output of <code>optimize().</code> You may have to do some tweaking of initial values and/or optimization algorithm to get convergence. As in the simulation, report both your parameter estimates and standard errors.</p>
+<h3 id="problem-4-fit">Problem 4: fit</h3>
+<p>Create tables and/or figures that show how well your estimates and model fit the data.</p>
+<h3 id="problem-5-entry-thresholds">Problem 5: entry thresholds</h3>
+<p>Compute entry thresholds and create a figure similar to Figure 4 from <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span>. Since this data generally has more pharmacies than in <span class="citation" data-cites="br1991">Bresnahan and Reiss (<a href="#ref-br1991">1991</a>)</span>, you should probably choose something larger than 5 for the maximum N to plot. Use the delta method to compute standard errors for your <span class="math inline">\(s_N\)</span> and add confidence bands to the figure.</p>
+<pre class="hljl">
+<span class="hljl-k">using</span><span class="hljl-t"> </span><span class="hljl-n">ForwardDiff</span><span class="hljl-t">
+</span><span class="hljl-cs"># delta method demo</span><span class="hljl-t">
+</span><span class="hljl-n">estimate</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-nfB">1.0</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-nfB">1.0</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-n">variance_estimate</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-p">[</span><span class="hljl-nfB">1.0</span><span class="hljl-t"> </span><span class="hljl-nfB">0.0</span><span class="hljl-p">;</span><span class="hljl-t">
+                     </span><span class="hljl-nfB">0.0</span><span class="hljl-t"> </span><span class="hljl-nfB">2.0</span><span class="hljl-p">]</span><span class="hljl-t">
+</span><span class="hljl-k">function</span><span class="hljl-t"> </span><span class="hljl-nf">func_of_estimate</span><span class="hljl-p">(</span><span class="hljl-n">θ</span><span class="hljl-p">)</span><span class="hljl-t">
+  </span><span class="hljl-cs"># you&#39;d replace this with your function to calculate the size thresholds</span><span class="hljl-t">
+  </span><span class="hljl-p">[</span><span class="hljl-nf">sum</span><span class="hljl-p">((</span><span class="hljl-n">θ</span><span class="hljl-p">)</span><span class="hljl-t"> </span><span class="hljl-oB">./</span><span class="hljl-t"> </span><span class="hljl-p">(</span><span class="hljl-n">θ</span><span class="hljl-oB">.*</span><span class="hljl-n">θ</span><span class="hljl-p">)),</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[</span><span class="hljl-ni">1</span><span class="hljl-p">]</span><span class="hljl-oB">*</span><span class="hljl-n">θ</span><span class="hljl-p">[</span><span class="hljl-ni">2</span><span class="hljl-p">],</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[</span><span class="hljl-ni">1</span><span class="hljl-p">]</span><span class="hljl-t"> </span><span class="hljl-oB">-</span><span class="hljl-t"> </span><span class="hljl-n">θ</span><span class="hljl-p">[</span><span class="hljl-ni">2</span><span class="hljl-p">]]</span><span class="hljl-t">
+</span><span class="hljl-k">end</span><span class="hljl-t">
+</span><span class="hljl-n">sn</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-nf">func_of_estimate</span><span class="hljl-p">(</span><span class="hljl-n">estimate</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">∇sn</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">ForwardDiff</span><span class="hljl-oB">.</span><span class="hljl-nf">jacobian</span><span class="hljl-p">(</span><span class="hljl-n">func_of_estimate</span><span class="hljl-p">,</span><span class="hljl-t"> </span><span class="hljl-n">estimate</span><span class="hljl-p">)</span><span class="hljl-t">
+</span><span class="hljl-n">variance_sn</span><span class="hljl-t"> </span><span class="hljl-oB">=</span><span class="hljl-t"> </span><span class="hljl-n">∇sn</span><span class="hljl-oB">*</span><span class="hljl-n">variance_estimate</span><span class="hljl-oB">*</span><span class="hljl-n">∇sn</span><span class="hljl-oB">&#39;</span>
+</pre>
+<p>3×3 Array{Float64,2}: 3.0 -3.0 1.0 -3.0 3.0 -1.0 1.0 -1.0 3.0</p>
+<div id="refs" class="references">
+<div id="ref-br1991">
+<p>Bresnahan, Timothy F., and Peter C. Reiss. 1991. “Entry and Competition in Concentrated Markets.” <em>Journal of Political Economy</em> 99 (5): pp. 977–1009. <a href="http://www.jstor.org/stable/2937655">http://www.jstor.org/stable/2937655</a>.</p>
+</div>
+</div>
+
+<HR />
+<div class="footer"><p>
+Published from <a href="pharmacyentry02-model.jmd">pharmacyentry02-model.jmd</a> using
+<a href="http://github.com/mpastell/Weave.jl">Weave.jl</a>  on 2019-03-04.
+<p></div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
