@@ -1,0 +1,246 @@
+/* Reset Body Property */
+body{border:0; margin:0; padding:0;}
+
+/*-------------------------------------------------------*/
+/* Copy colors and fonts from UBC's other websites */
+body {
+	font-size: 75%;
+	font-family: Sans-Serif;
+	color: #5d5d5d;
+	background-color: #adadad; 
+}
+
+
+/**********************************************************************/
+.logoHead, .menuHead, .main, .foot {
+    width:760px;
+    margin:0 auto;
+    background-color: #ffffff;
+}
+/*------------------*/
+
+
+/* LOGO */
+.logoHead{
+    height:80px;
+    line-height:60px;
+    background-color: #002859;
+    font-weight:bold;
+    color:#FFFFFF;
+    /*text-transform: uppercase;*/
+    font-family: Helvetica, Arial, Sans;
+    font-size: 110%;
+    padding:0;
+    margin: 10px auto auto auto;
+}
+.logoHead ul {
+    margin:0;
+    padding:0;
+}
+.logoHead ul li {
+    display:inline;
+    list-style-type:none;
+    padding: 6px;
+    float: left;
+    height:60px;
+    border-left: 3px solid white;
+}
+.logoHead ul li:first-child {border-left:0;}
+.logoHead ul li a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+/**********************************************************************/
+.menuHead {    
+    height:25px;
+    width:750px;
+    padding: 0 5px 0 5px;
+    line-height:25px;    
+    color:#002859;
+    text-transform: uppercase;
+    font-weight:bold;
+    background-color: #ffffff; 
+    font-size:75%;
+}
+
+.menuHead ul {
+    margin:0;
+    padding:0;
+}
+.menuHead ul li {
+    display:block;
+    list-style-type:none;
+    /*padding:2px 0.5em;*/
+    text-decoration: none;
+    float: left;
+    color: #5d5d5d;
+    background-color: #ffffff; 
+    border-left: 1px solid #5d5d5d;
+    padding: 0 0.4em 0 0.4em;
+    margin: 0 0.4em 0 -0.4em;
+}
+
+.menuHead ul li a{
+    text-decoration: none;
+    color: #5d5d5d;
+    background-color: #ffffff; 
+    /*border: 2px solid #e1e1e1; */
+}
+.menuHead ul li:first-child {
+    border-left:0;
+    padding: 0 0.4em 0 0.0em;
+    margin: 0 0.4em 0 0.0em;
+}
+.menuHead ul li a:hover{
+    /*background-color: #e5e5e5; */
+    color: #002859;
+    /*border-style: outset;*/
+}
+
+/**********************************************************************/
+.main {
+    margin:-24px auto auto auto;
+    width:740px;
+    min-height:390px;
+    padding:10px;
+}
+.main h1,
+.main h2,
+.main h3,
+.main h4,
+.main h5,
+.main h6
+{
+	margin: 1em 0 0.5em 0;
+	font-weight: bold;
+	color: #123b5c;
+}
+
+#UbcMainContent .UbcHeadline
+{
+	color: #123b5c;
+	text-transform: uppercase;
+}
+
+.main h1
+{
+	font-size: 200%;
+}
+
+.main h2
+{
+	font-size: 150%;
+}
+
+.main h3
+{
+	font-size: 125%;
+}
+
+.main h1 img, .main h2 img, .main h3 img, 
+.main h4 img, .main h5 img, .main h6 img {
+  margin: 0;
+}
+
+
+/* Text elements
+-------------------------------------------------------------- */
+
+.main p           { margin: 1em 0; line-height: 1.5em; }
+.main p img.left  { float: left; margin: 1.5em 1.5em 1.5em 0; padding: 0; }
+.main p img.right { float: right; margin: 1.5em 0 1.5em 1.5em; }
+
+.main a:focus, 
+.main a:hover     { }
+.main a           { color: #708ea1; text-decoration: underline; }
+
+.main blockquote  { margin: 1.5em; color: #666; font-style: italic; }
+.main strong      { font-weight: bold; }
+.main em, .main dfn      { font-style: italic; }
+.main dfn         { font-weight: bold; }
+.main sup, .main sub    { line-height: 0; }
+
+.main abbr, 
+.main acronym     { border-bottom: 1px dotted #666; }
+.main address     { margin: 0 0 1.5em; font-style: italic; }
+.main del         { color:#666; }
+
+.main pre 				{ margin: 1.5em 0; white-space: pre; }
+.main pre,
+.main code,
+.main tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
+
+
+/* Lists
+-------------------------------------------------------------- */
+
+.main li ul, 
+.main li ol       { margin:0 0em;}
+.main ul, ol      { margin: 2px; 
+		    line-height:1.2em;
+		    text-indent:0px; 
+		    padding:10px;
+		  }
+
+.main ul          { list-style-type: disc; }
+.main ol          { list-style-type: decimal; }
+
+.main dl          { margin: 0 0 1.5em 0; }
+.main dl dt       { font-weight: bold; }
+.main dd          { margin-left: 1.5em;}
+
+
+/* Tables
+-------------------------------------------------------------- */
+
+.main table       { margin-bottom: 1.4em; width:100%; }
+.main th          { font-weight: bold; }
+.main thead th    { background: #728FA2; color: #fff; }
+.main th,
+.main td,
+.main caption { padding: 4px 10px 4px 5px; vertical-align: top; }
+.main tr.even td  { background: #e5ecf9; }
+.main tfoot       { font-style: italic; }
+.main caption     { background: #eee; }
+
+
+/* Misc classes
+-------------------------------------------------------------- */
+
+.main .small      { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
+.main .large      { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
+.main .hide       { display: none; }
+
+.main .quiet      { color: #666; }
+.main .loud       { color: #000; }
+.main .highlight  { background:#ff0; }
+.main .added      { background:#060; color: #fff; }
+.main .removed    { background:#900; color: #fff; }
+
+.main .first      { margin-left:0; padding-left:0; }
+.main .last       { margin-right:0; padding-right:0; }
+.main .top        { margin-top:0; padding-top:0; }
+.main .bottom     { margin-bottom:0; padding-bottom:0; }
+
+.main p.intro
+{
+	color: #123b5c;
+	font-size: 175%;
+	font-weight: bold;
+	line-height: 1.1em;
+}
+
+/* Footer
+---------------------------------------------------------------------- */
+.foot 
+{    
+    height:25px;
+    width:750px;
+    padding: 0 5px 0 5px;
+    line-height:25px;    
+    color:#002859;
+    font-weight:bold;
+    background-color: #777777; 
+    font-size:75%;
+}
